@@ -71,6 +71,7 @@ void imprimir_livro(Livro *livro);
 void criar_base_ordenada_livros(FILE *arq, int tamanho);
 void criar_base_desordenada_livros(FILE *arq, int tamanho);
 void imprimir_base_livros(FILE *arq);
+int posicao_livro(Livro *livro, FILE *arq)
 
 /**********************************************************
                  FUNÇÕES DO EMPRÉSTIMO

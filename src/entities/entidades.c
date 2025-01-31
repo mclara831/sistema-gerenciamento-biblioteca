@@ -26,7 +26,7 @@ void criar_bases_desordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_ar
 {
     criar_base_desordenada_clientes(clientes_arq, tamanho);
     criar_base_desordenada_livros(livros_arq, tamanho);
-    criar_base_desordenada_emprestimos(emp_arq, 7);
+    criar_base_ordenada_emprestimos(emp_arq, 7);
 }
 
 struct tm criar_data()
@@ -298,6 +298,21 @@ void imprimir_base_livros(FILE *arq)
     free(livro);
 }
 
+int posicao_livro(Livro *livro, FILE *arq) {
+    rewind(arq);
+    Livro *l;
+    int posicao = 0;
+    while ((l = ler_livro(arq)) != NULL) {
+        if (livro->id == l->id)
+        {
+            break;
+        }
+        posicao++;
+    }
+
+    return posicao;
+}
+
 /**********************************************************
                  FUNÇÕES DO EMPRÉSTIMO
 ***********************************************************/
@@ -409,16 +424,21 @@ void criar_base_desordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
         vetor[i] = i + 1;
-
+    
     shuffle(vetor, tamanho);
 
     struct tm data_emp = criar_data();
-    struct tm *data_presvista = adicionar_dias(&data_emp, 7);
+    struct tm data_prev = criar_data();
+    struct tm *data_prevista = adicionar_dias(&data_prev, 7);
 
     for (int i = 0; i < tamanho; i++)
     {
-        emprestimo = criar_emprestimo(vetor[i], NULL, NULL, data_emp, *data_presvista, 5.00, 'n', 'n');
+        Cliente *cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00");
+        Livro *livro = criar_livro(vetor[i], "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
+        emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 0.00, 'n', 'n');
         salvar_emprestimo(emprestimo, arq);
+        free(livro);
+        free(cliente);
         liberar_emprestimo(emprestimo);
     }
 }

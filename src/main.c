@@ -21,15 +21,78 @@ int main(void)
         printf("[ERRO]: Não foi possivel abrir o arquivo de emprestimos!");
         exit(1);
     }
+    
+    /**************************************************************************
+                TESTES DAS BASES DAS ENTIDADES COM DIFERENTES TAMANHOS
+    ***************************************************************************/
+    /*int tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((clientes_arq = fopen("arq_clientes.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de clientes!");
+            exit(1);
+        }
+        criar_base_desordenada_clientes(clientes_arq, tam);
+        buscar_cliente_sequencial(3, clientes_arq);
+        fclose(clientes_arq);
+        tam = tam * 10;
+    }
 
-    criar_bases_ordenadas(clientes_arq, livros_arq, emprestimos_arq, 10);
+    tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((livros_arq = fopen("arq_livros.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de livros!");
+            exit(1);
+        }
+        criar_base_desordenada_livros(livros_arq, tam);
+        buscar_livro_sequencial(3, livros_arq);
+        fclose(livros_arq);
+        tam = tam * 10;
+    }
+
+    tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((clientes_arq = fopen("arq_clientes.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de clientes!");
+            exit(1);
+        }
+        criar_base_ordenada_clientes(clientes_arq, tam);
+        buscar_cliente_binaria(3, clientes_arq);
+        fclose(clientes_arq);
+        tam = tam * 10;
+    }
+
+    tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((livros_arq = fopen("arq_livros.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de livros!");
+            exit(1);
+        }
+        criar_base_ordenada_livros(livros_arq, tam);
+        buscar_livro_binaria(3, livros_arq);
+        fclose(livros_arq);
+        tam = tam * 10;
+    }
+
+    system("pause");*/
+
+    /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
+    criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 5);
 
     int opcao = 0, continuar = 1, tamanho;
-   
+
     printf("**************** BEM VINDO AO SISTEMA DE GERENCIAMENTO DE BIBLIOTECA ************************");
 
     while (continuar)
     {
+        // system("cls");
         menu_principal();
         scanf("%d", &opcao);
 
@@ -57,23 +120,26 @@ int main(void)
             imprimir_base_livros(livros_arq);
             break;
         case 7:
-            registrar_novo_emprestimo(clientes_arq, livros_arq, emprestimos_arq);
+            imprimir_livros_disponiveis(livros_arq);
             break;
         case 8:
-            realizar_devolucao(emprestimos_arq, livros_arq);
+            registrar_novo_emprestimo(clientes_arq, livros_arq, emprestimos_arq);
             break;
         case 9:
-            renovar_emprestimo(emprestimos_arq);
+            realizar_devolucao(emprestimos_arq, livros_arq);
             break;
         case 10:
-            imprimir_base_emprestimos(emprestimos_arq);
+            renovar_emprestimo(emprestimos_arq);
             break;
         case 11:
+            imprimir_base_emprestimos(emprestimos_arq);
+            break;
+        case 12:
             printf("Digite o tamanho da base de dados que deseja criar: ");
             scanf("%d", &tamanho);
             criar_bases_ordenadas(clientes_arq, livros_arq, emprestimos_arq, tamanho);
             break;
-        case 12:
+        case 13:
             printf("Digite o tamanho da base de dados que deseja criar: ");
             scanf("%d", &tamanho);
             criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, tamanho);

@@ -12,17 +12,18 @@ void menu_principal()
     printf("\nLivros\n");
     printf("\t4. Registrar um novo livro\n");
     printf("\t5. Buscar livro\n");
-    printf("\t6. Imprimir base de dados de livros");
+    printf("\t6. Imprimir base de dados de livros\n");
+    printf("\t7. Imprimir base de dados de livros disponiveis");
 
     printf("\nEmprestimo\n");
-    printf("\t7. Registrar um novo emprestimo\n");
-    printf("\t8. Realizar devolucao\n");
-    printf("\t9. Renovar emprestimo\n");
-    printf("\t10. Imprimir base de dados de emprestimos\n");
+    printf("\t8. Registrar um novo emprestimo\n");
+    printf("\t9. Realizar devolucao\n");
+    printf("\t10. Renovar emprestimo\n");
+    printf("\t11. Imprimir base de dados de emprestimos\n");
 
     printf("\nBase de dados\n");
-    printf("\t11. Gerar base de dados ordenada\n");
-    printf("\t12. Gerar base de dados desordenada\n");
+    printf("\t12. Gerar base de dados ordenada\n");
+    printf("\t13. Gerar base de dados desordenada\n");
     printf("\n\t0. Sair\n");
 
     printf("\nSelecione uma opcao: ");
@@ -152,6 +153,8 @@ void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_a
     Cliente *c = buscar_cliente_sequencial(cod_cliente, clientes_arq);
     Livro *l = buscar_livro_sequencial(cod_livro, livros_arq);
 
+    int posicao = posicao_livro(l, livros_arq);
+
     if (l == NULL || c == NULL)
     {
         printf("Livro e/ou cliente nao encontrado.\n");
@@ -169,7 +172,7 @@ void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_a
     struct tm *data_prevista = adicionar_dias(&data_prev, 7);
 
     Livro *novoLivro = criar_livro(l->id, l->titulo, l->autor, l->genero, l->anoPublicacao, 'n');
-    fseek(livros_arq, tamanho_registro_livro() * (l->id - 1), SEEK_SET);
+    fseek(livros_arq, tamanho_registro_livro() * (posicao), SEEK_SET);
     salvar_livro(novoLivro, livros_arq);
 
     Emprestimo *e = criar_emprestimo(tamanho_arquivo_emprestimos(emp_arq) + 1, l, c, data_emp, *data_prevista, 5.00, 'n', 'n');
@@ -201,8 +204,10 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
 
     Livro *l = buscar_livro_sequencial(e->livro->id, livro_arq);
 
+    int posicao = posicao_livro(l, livro_arq);
+
     Livro *novoLivro = criar_livro(l->id, l->titulo, l->autor, l->genero, l->anoPublicacao, 's');
-    fseek(livro_arq, tamanho_registro_livro() * (l->id - 1), SEEK_SET);
+    fseek(livro_arq, tamanho_registro_livro() * (posicao), SEEK_SET);
     salvar_livro(novoLivro, livro_arq);
 
     struct tm data_dev = criar_data();
@@ -215,7 +220,7 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
     Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, e->data_prevista, e->valor, 's', atraso);
     fseek(emp_arq, tamanho_registro_emprestimo() * (e->id - 1), SEEK_SET);
     salvar_emprestimo(emp, emp_arq);
-
+    
     imprimir_emprestimo(emp);
     printf("Livro devolvido!\n");
 
@@ -236,6 +241,12 @@ void renovar_emprestimo(FILE *emp_arq)
         return;
     }
 
+    if (e->devolvido == 's')
+    {
+        printf("\nEmprestimo ja realizado!\n");
+        return;
+    }
+
     struct tm *data_prev = adicionar_dias(&e->data_prevista, 7);
 
     Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, *data_prev, e->valor, e->devolvido, e->atraso);
@@ -247,4 +258,17 @@ void renovar_emprestimo(FILE *emp_arq)
 
     liberar_emprestimo(e);
     liberar_emprestimo(emp);
+}
+
+void imprimir_livros_disponiveis(FILE *livros_arq) {
+    rewind(livros_arq);
+    Livro *livro;
+    while ((livro = ler_livro(livros_arq)) != NULL)
+    {
+        if (livro->disponibilidade == 's')
+        {
+            imprimir_livro(livro); 
+        }
+    }
+    free(livro);
 }
