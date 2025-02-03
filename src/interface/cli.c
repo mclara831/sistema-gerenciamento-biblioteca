@@ -48,7 +48,7 @@ void registrar_novo_cliente(FILE *arq)
 
     while (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-')
     {
-        printf("\n\nDados digitados incorretamente! Tente novamente!\n");
+        printf("\n\n[AVISO]: Dados digitados incorretamente! Tente novamente!\n");
         fflush(stdin);
         printf("Digite o cpf(XXX.XXX.XXX-XX): ");
         fgets(cpf, 14, stdin);
@@ -74,7 +74,7 @@ void buscar_cliente(FILE *arq)
 
     while (opcao != 1 && opcao != 2)
     {
-        printf("Opcao invalida! Digite novamente!");
+        printf("[AVISO]: Opcao invalida! Digite novamente!");
         menu_tipo_busca();
         scanf("%d", &opcao);
     }
@@ -82,7 +82,7 @@ void buscar_cliente(FILE *arq)
     (opcao == 1) ? (c = buscar_cliente_sequencial(codigo, arq)) : (c = buscar_cliente_binaria(codigo, arq));
 
     printf("\nDados do cliente encontrado:\n");
-    (c != NULL) ? imprimir_cliente(c) : printf("Cliente nao econtrado na base de dados!\n");
+    (c != NULL) ? imprimir_cliente(c) : printf("[AVISO]: Cliente nao econtrado na base de dados!\n");
 }
 
 void registrar_novo_livro(FILE *arq)
@@ -106,7 +106,7 @@ void registrar_novo_livro(FILE *arq)
     scanf("%c", &disponibilidade);
     while (disponibilidade != 's' && disponibilidade != 'n')
     {
-        printf("\n\nDados digitados incorretamente! Tente novamente!\n");
+        printf("\n\n[AVISO]: Dados digitados incorretamente! Tente novamente!\n");
         printf("Disponivel(s/n): ");
         fflush(stdin);
         scanf("%c", &disponibilidade);
@@ -131,7 +131,7 @@ void buscar_livro(FILE *arq)
 
     while (opcao != 1 && opcao != 2)
     {
-        printf("Opcao invalida! Digite novamente!");
+        printf("[AVISO]: Opcao invalida! Digite novamente!");
         menu_tipo_busca();
         scanf("%d", &opcao);
     }
@@ -139,7 +139,7 @@ void buscar_livro(FILE *arq)
     (opcao == 1) ? (l = buscar_livro_sequencial(codigo, arq)) : (l = buscar_livro_binaria(codigo, arq));
 
     printf("\nDados do livro encontrado:\n");
-    (l != NULL) ? imprimir_livro(l) : printf("Livro nao econtrado na base de dados!\n");
+    (l != NULL) ? imprimir_livro(l) : printf("[AVISO]: Livro nao encontrado na base de dados!\n");
 }
 
 void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq)
@@ -147,23 +147,30 @@ void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_a
     int cod_cliente, cod_livro;
     printf("\nDigite o codigo do livro buscado: ");
     scanf("%d", &cod_livro);
+    Livro *l = buscar_livro_sequencial(cod_livro, livros_arq);
+
+    if (l == NULL)
+    {
+        printf("[AVISO]: Livro nao encontrado.\n");
+        return;
+    }
+
     printf("\nDigite o codigo do cliente buscado: ");
     scanf("%d", &cod_cliente);
 
     Cliente *c = buscar_cliente_sequencial(cod_cliente, clientes_arq);
-    Livro *l = buscar_livro_sequencial(cod_livro, livros_arq);
 
-    int posicao = posicao_livro(l, livros_arq);
-
-    if (l == NULL || c == NULL)
+    if (c == NULL)
     {
-        printf("Livro e/ou cliente nao encontrado.\n");
+        printf("[AVISO]: Cliente nao encontrado.\n");
         return;
     }
 
+    int posicao = posicao_livro(l, livros_arq);
+
     if (l->disponibilidade == 'n')
     {
-        printf("O livro escolhido nao esta disponivel! Escolha outro livro ou volte depois!\n");
+        printf("[AVISO]: O livro escolhido nao esta disponivel! Escolha outro livro ou volte depois!\n");
         return;
     }
 
@@ -175,7 +182,7 @@ void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_a
     fseek(livros_arq, tamanho_registro_livro() * (posicao), SEEK_SET);
     salvar_livro(novoLivro, livros_arq);
 
-    Emprestimo *e = criar_emprestimo(tamanho_arquivo_emprestimos(emp_arq) + 1, l, c, data_emp, *data_prevista, 5.00, 'n', 'n');
+    Emprestimo *e = criar_emprestimo(tamanho_arquivo_emprestimos(emp_arq) + 1, l, c, data_emp, *data_prevista, 5.00, 'n', 0.00, 'n');
     imprimir_emprestimo(e);
     fseek(emp_arq, 0, SEEK_END);
     salvar_emprestimo(e, emp_arq);
@@ -198,16 +205,23 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
 
     if (e == NULL)
     {
-        printf("Codigo de emprestimo nao encontrado! Tente novamente!\n");
+        printf("[AVISO]: Codigo de emprestimo nao encontrado! Tente novamente!\n");
+        return;
+    }
+
+    if (e->devolvido == 's')
+    {
+        printf("\nEmprestimo ja realizado!\n");
         return;
     }
 
     Livro *l = buscar_livro_sequencial(e->livro->id, livro_arq);
 
-    int posicao = posicao_livro(l, livro_arq);
+    int posicao_liv = posicao_livro(l, livro_arq);
+    int posicao_emp = posicao_emprestimo(e, emp_arq);
 
     Livro *novoLivro = criar_livro(l->id, l->titulo, l->autor, l->genero, l->anoPublicacao, 's');
-    fseek(livro_arq, tamanho_registro_livro() * (posicao), SEEK_SET);
+    fseek(livro_arq, tamanho_registro_livro() * (posicao_liv), SEEK_SET);
     salvar_livro(novoLivro, livro_arq);
 
     struct tm data_dev = criar_data();
@@ -217,8 +231,11 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
 
     (t1 <= t2) ? (atraso = 'n') : (atraso = 's');
 
-    Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, e->data_prevista, e->valor, 's', atraso);
-    fseek(emp_arq, tamanho_registro_emprestimo() * (e->id - 1), SEEK_SET);
+    int dias_em_atraso = calcular_multa(e);
+    double multa = 1.50;
+
+    Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, e->data_prevista, e->valor, 's', dias_em_atraso * multa, atraso);
+    fseek(emp_arq, tamanho_registro_emprestimo() * (posicao_emp), SEEK_SET);
     salvar_emprestimo(emp, emp_arq);
     
     imprimir_emprestimo(emp);
@@ -237,20 +254,21 @@ void renovar_emprestimo(FILE *emp_arq)
 
     if (e == NULL)
     {
-        printf("Codigo de emprestimo nao encontrado! Tente novamente!\n");
+        printf("[AVISO]: Codigo de emprestimo nao encontrado! Tente novamente!\n");
         return;
     }
 
     if (e->devolvido == 's')
     {
-        printf("\nEmprestimo ja realizado!\n");
+        printf("\n[AVISO]: Emprestimo ja finalizado!\n");
         return;
     }
 
     struct tm *data_prev = adicionar_dias(&e->data_prevista, 7);
+    int posicao_emp = posicao_emprestimo(e, emp_arq);
 
-    Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, *data_prev, e->valor, e->devolvido, e->atraso);
-    fseek(emp_arq, tamanho_registro_emprestimo() * (e->id - 1), SEEK_SET);
+    Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, *data_prev, e->valor, e->devolvido, e->multa, e->atraso);
+    fseek(emp_arq, tamanho_registro_emprestimo() * (posicao_emp), SEEK_SET);
     salvar_emprestimo(emp, emp_arq);
 
     printf("Emprestimo %d renovado com sucesso!\n", e->id);

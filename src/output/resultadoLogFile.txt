@@ -1,0 +1,174 @@
+=====================TESTES NAS BASES DE DADOS=============================
+
+---------BUSCA SEQUENCIAL NAS BASES DESORDENADAS-------
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 4
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 3
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 73
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 30
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 758
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 300
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 4304
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10000
+Chave procurada: 3000
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 7
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 99
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 70
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 132
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 700
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 7905
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10000
+Chave procurada: 7000
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 9
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 8
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 53
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 80
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 624
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 800
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 5815
+Tempo de execucao: 0.01 segundos
+Tamanho da base: 10000
+Chave procurada: 8000
+
+
+---------BUSCA BINARIA NAS BASES ORDENADAS-------
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 2
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 3
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 30
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 7
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 300
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 12
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10000
+Chave procurada: 3000
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 3
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 7
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 70
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 8
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 700
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 13
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10000
+Chave procurada: 7000
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 2
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10
+Chave procurada: 3
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 100
+Chave procurada: 30
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 7
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 1000
+Chave procurada: 300
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 12
+Tempo de execucao: 0.00 segundos
+Tamanho da base: 10000
+Chave procurada: 3000
+

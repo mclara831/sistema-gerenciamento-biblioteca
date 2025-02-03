@@ -21,11 +21,11 @@ int main(void)
         printf("[ERRO]: Não foi possivel abrir o arquivo de emprestimos!");
         exit(1);
     }
-    
+
     /**************************************************************************
                 TESTES DAS BASES DAS ENTIDADES COM DIFERENTES TAMANHOS
     ***************************************************************************/
-    /*int tam = 10;
+    int tam = 10;
     for (int i = 0; i < 4; i++)
     {
         if ((clientes_arq = fopen("arq_clientes.dat", "w+b")) == NULL)
@@ -34,7 +34,7 @@ int main(void)
             exit(1);
         }
         criar_base_desordenada_clientes(clientes_arq, tam);
-        buscar_cliente_sequencial(3, clientes_arq);
+        buscar_cliente_sequencial(3*(tam/10), clientes_arq);
         fclose(clientes_arq);
         tam = tam * 10;
     }
@@ -48,8 +48,22 @@ int main(void)
             exit(1);
         }
         criar_base_desordenada_livros(livros_arq, tam);
-        buscar_livro_sequencial(3, livros_arq);
+        buscar_livro_sequencial(7*(tam/10), livros_arq);
         fclose(livros_arq);
+        tam = tam * 10;
+    }
+
+    tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((emprestimos_arq = fopen("arq_emprestimos.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de emprestimos!");
+            exit(1);
+        }
+        criar_base_desordenada_emprestimos(livros_arq, tam);
+        buscar_emprestimo_sequencial(8*(tam/10), livros_arq);
+        fclose(emprestimos_arq);
         tam = tam * 10;
     }
 
@@ -62,7 +76,7 @@ int main(void)
             exit(1);
         }
         criar_base_ordenada_clientes(clientes_arq, tam);
-        buscar_cliente_binaria(3, clientes_arq);
+        buscar_cliente_binaria(3*(tam/10), clientes_arq);
         fclose(clientes_arq);
         tam = tam * 10;
     }
@@ -76,12 +90,26 @@ int main(void)
             exit(1);
         }
         criar_base_ordenada_livros(livros_arq, tam);
-        buscar_livro_binaria(3, livros_arq);
+        buscar_livro_binaria(7*(tam/10), livros_arq);
         fclose(livros_arq);
         tam = tam * 10;
     }
 
-    system("pause");*/
+    tam = 10;
+    for (int i = 0; i < 4; i++)
+    {
+        if ((emprestimos_arq = fopen("arq_emprestimos.dat", "w+b")) == NULL)
+        {
+            printf("[ERRO]: Não foi possivel abrir o arquivo de emprestimos!");
+            exit(1);
+        }
+        criar_base_ordenada_emprestimos(livros_arq, tam);
+        buscar_emprestimo_binaria(3*(tam/10), livros_arq);
+        fclose(emprestimos_arq);
+        tam = tam * 10;
+    }
+
+    system("pause");
 
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
     criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 5);

@@ -33,6 +33,7 @@ typedef struct TEmprestimo
     struct tm data_prevista;
     double valor;
     char devolvido;
+    double multa;
     char atraso;
 } Emprestimo;
 
@@ -71,7 +72,7 @@ void imprimir_livro(Livro *livro);
 void criar_base_ordenada_livros(FILE *arq, int tamanho);
 void criar_base_desordenada_livros(FILE *arq, int tamanho);
 void imprimir_base_livros(FILE *arq);
-int posicao_livro(Livro *livro, FILE *arq)
+int posicao_livro(Livro *livro, FILE *arq);
 
 /**********************************************************
                  FUNÇÕES DO EMPRÉSTIMO
@@ -79,12 +80,14 @@ int posicao_livro(Livro *livro, FILE *arq)
 int tamanho_registro_emprestimo();
 void liberar_emprestimo(Emprestimo *emp);
 int tamanho_arquivo_emprestimos(FILE *arq);
-Emprestimo *criar_emprestimo(int id, Livro *livro, Cliente *cliente, struct tm data_emprestimo, struct tm data_prevista, double valor, char devolvido, char atraso);
+Emprestimo *criar_emprestimo(int id, Livro *livro, Cliente *cliente, struct tm data_emprestimo, struct tm data_prevista, double valor, char devolvido,double multa, char atraso);
 void salvar_emprestimo(Emprestimo *emprestimo, FILE *arq);
 Emprestimo *ler_emprestimo(FILE *arq);
 void imprimir_emprestimo(Emprestimo *emprestimo);
 void criar_base_ordenada_emprestimos(FILE *arq, int tamanho);
 void criar_base_desordenada_emprestimos(FILE *arq, int tamanho);
 void imprimir_base_emprestimos(FILE *arq);
+int posicao_emprestimo(Emprestimo *emprestimo, FILE *arq);
+double calcular_multa(Emprestimo *emprestimo);
 
 #endif

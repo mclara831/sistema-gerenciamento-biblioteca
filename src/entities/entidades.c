@@ -26,7 +26,7 @@ void criar_bases_desordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_ar
 {
     criar_base_desordenada_clientes(clientes_arq, tamanho);
     criar_base_desordenada_livros(livros_arq, tamanho);
-    criar_base_ordenada_emprestimos(emp_arq, 7);
+    criar_base_desordenada_emprestimos(emp_arq, 7);
 }
 
 struct tm criar_data()
@@ -318,7 +318,7 @@ int posicao_livro(Livro *livro, FILE *arq) {
 ***********************************************************/
 int tamanho_registro_emprestimo()
 {
-    return sizeof(int) + sizeof(Livro) + sizeof(Cliente) + sizeof(struct tm) + sizeof(struct tm) + sizeof(double) + sizeof(char) + sizeof(char);
+    return sizeof(int) + sizeof(Livro) + sizeof(Cliente) + sizeof(struct tm) + sizeof(struct tm) + sizeof(double) + sizeof(char) + + sizeof(double) + sizeof(char);
 }
 
 int tamanho_arquivo_emprestimos(FILE *arq)
@@ -335,7 +335,7 @@ void liberar_emprestimo(Emprestimo *emp)
     free(emp);
 }
 
-Emprestimo *criar_emprestimo(int id, Livro *livro, Cliente *cliente, struct tm data_emprestimo, struct tm data_prevista, double valor, char devolvido, char atraso)
+Emprestimo *criar_emprestimo(int id, Livro *livro, Cliente *cliente, struct tm data_emprestimo, struct tm data_prevista, double valor, char devolvido, double multa, char atraso)
 {
     Emprestimo *emprestimo = (Emprestimo *)malloc(sizeof(Emprestimo));
     emprestimo->id = id;
@@ -345,6 +345,7 @@ Emprestimo *criar_emprestimo(int id, Livro *livro, Cliente *cliente, struct tm d
     emprestimo->data_prevista = data_prevista;
     emprestimo->valor = valor;
     emprestimo->devolvido = devolvido;
+    emprestimo->multa = multa;
     emprestimo->atraso = atraso;
     return emprestimo;
 }
@@ -358,6 +359,7 @@ void salvar_emprestimo(Emprestimo *emprestimo, FILE *arq)
     fwrite(&emprestimo->data_prevista, sizeof(struct tm), 1, arq);
     fwrite(&emprestimo->valor, sizeof(double), 1, arq);
     fwrite(&emprestimo->devolvido, sizeof(char), sizeof(char), arq);
+    fwrite(&emprestimo->multa, sizeof(double), 1, arq);
     fwrite(&emprestimo->atraso, sizeof(char), sizeof(char), arq);
 }
 
@@ -377,6 +379,7 @@ Emprestimo *ler_emprestimo(FILE *arq)
     fread(&emprestimo->data_prevista, sizeof(struct tm), 1, arq);
     fread(&emprestimo->valor, sizeof(double), 1, arq);
     fread(&emprestimo->devolvido, sizeof(char), sizeof(char), arq);
+    fread(&emprestimo->multa, sizeof(double), 1, arq);
     fread(&emprestimo->atraso, sizeof(char), sizeof(char), arq);
     return emprestimo;
 }
@@ -401,9 +404,9 @@ void criar_base_ordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        Cliente *cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00");
-        Livro *livro = criar_livro(vetor[i], "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
-        emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 0.00, 'n', 'n');
+        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00");
+        Livro *livro = criar_livro(1, "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
+        emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 5.00, 'n', 0.00, 'n');
         salvar_emprestimo(emprestimo, arq);
         free(livro);
         free(cliente);
@@ -433,9 +436,9 @@ void criar_base_desordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        Cliente *cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00");
-        Livro *livro = criar_livro(vetor[i], "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
-        emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 0.00, 'n', 'n');
+        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00");
+        Livro *livro = criar_livro(1, "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
+        emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 5.00, 'n', 0.00, 'n');
         salvar_emprestimo(emprestimo, arq);
         free(livro);
         free(cliente);
@@ -460,6 +463,10 @@ void imprimir_emprestimo(Emprestimo *emprestimo)
     printf("R$%.2f", emprestimo->valor);
     printf("\nDevolvido: ");
     printf("%c", emprestimo->devolvido);
+    if (emprestimo->multa > 0) {
+        printf("\nValor da multa: ");
+        printf("R$%.2f", emprestimo->multa);
+    }
     printf("\nDevolvido com atraso: ");
     printf("%c", emprestimo->atraso);
     printf("\n**********************************************\n");
@@ -474,4 +481,36 @@ void imprimir_base_emprestimos(FILE *arq)
         imprimir_emprestimo(emprestimo);
         liberar_emprestimo(emprestimo);
     }
+}
+
+int posicao_emprestimo(Emprestimo *emprestimo, FILE *arq) {
+    rewind(arq);
+    Emprestimo *e;
+    int posicao = 0;
+    while ((e = ler_emprestimo(arq)) != NULL) {
+        if (emprestimo->id == e->id)
+        {
+            break;
+        }
+        posicao++;
+    }
+    return posicao;
+}
+
+double calcular_multa(Emprestimo *emprestimo) {
+    struct tm data_prev = emprestimo->data_prevista;
+    struct tm data_atual = criar_data();
+    // struct tm *data_atual2 = adicionar_dias(&data_atual, 1);
+
+    time_t t_prevista = mktime(&data_prev);
+    time_t t_atual = mktime(&data_atual);
+
+    double diferenca = difftime(t_atual, t_prevista) / 86400; 
+    printf("%d", (int)diferenca);
+    
+    if (diferenca > 0)
+    {
+        return (int)diferenca;
+    }
+    return 0;
 }
