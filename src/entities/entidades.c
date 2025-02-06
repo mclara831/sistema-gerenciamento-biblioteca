@@ -15,18 +15,41 @@ void shuffle(int *vet, int tamanho_maximo)
     }
 }
 
+void salvar_status_base(int ordenada) {
+    FILE *status_arq = fopen("status.txt", "w");
+    if (status_arq == NULL) {
+        printf("Erro ao abrir o arquivo de status!\n");
+        return;
+    }
+    fprintf(status_arq, "%d", ordenada);
+    fclose(status_arq);
+}
+
+int ler_status_base() {
+    FILE *status_arq = fopen("status.txt", "r");
+    if (status_arq == NULL) {
+        return 0; // Se o arquivo não existir, consideramos desordenada
+    }
+    int ordenada;
+    fscanf(status_arq, "%d", &ordenada);
+    fclose(status_arq);
+    return ordenada;
+}
+
 void criar_bases_ordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, int tamanho)
 {
+    salvar_status_base(1); 
     criar_base_ordenada_clientes(clientes_arq, tamanho);
     criar_base_ordenada_livros(livros_arq, tamanho);
-    criar_base_ordenada_emprestimos(emp_arq, 7);
+    criar_base_ordenada_emprestimos(emp_arq, tamanho);
 }
 
 void criar_bases_desordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, int tamanho)
 {
+    salvar_status_base(0); 
     criar_base_desordenada_clientes(clientes_arq, tamanho);
     criar_base_desordenada_livros(livros_arq, tamanho);
-    criar_base_desordenada_emprestimos(emp_arq, 7);
+    criar_base_desordenada_emprestimos(emp_arq, tamanho);
 }
 
 struct tm criar_data()
@@ -53,7 +76,7 @@ void imprimir_data(struct tm *data)
 ***********************************************************/
 int tamanho_registro_cliente()
 {
-    return sizeof(int) + sizeof(char) * 20 + sizeof(char) * 15;
+    return sizeof(int) + sizeof(char) * 50 + sizeof(char) * 15;
 }
 
 int tamanho_arquivo_clientes(FILE *arq)
@@ -78,7 +101,7 @@ Cliente *criar_cliente(int id, char *nome, char *cpf)
 void salvar_cliente(Cliente *cliente, FILE *arq)
 {
     fwrite(&cliente->id, sizeof(int), 1, arq);
-    fwrite(cliente->nome, sizeof(char), 20, arq);
+    fwrite(cliente->nome, sizeof(char), 50, arq);
     fwrite(cliente->cpf, sizeof(char), 15, arq);
 }
 
@@ -90,7 +113,7 @@ Cliente *ler_cliente(FILE *arq)
         free(cliente);
         return NULL;
     }
-    fread(cliente->nome, sizeof(char), 20, arq);
+    fread(cliente->nome, sizeof(char), 50, arq);
     fread(cliente->cpf, sizeof(char), 15, arq);
     return cliente;
 }
@@ -166,12 +189,27 @@ void imprimir_base_clientes(FILE *arq)
     free(cliente);
 }
 
+int posicao_cliente(Cliente *cliente, FILE *arq) {
+    rewind(arq);
+    Cliente *c;
+    int posicao = 0;
+    while ((c = ler_cliente(arq)) != NULL) {
+        if (cliente->id == c->id)
+        {
+            break;
+        }
+        posicao++;
+    }
+
+    return posicao;
+}
+
 /**********************************************************
                  FUNÇÕES DO LIVRO
 ***********************************************************/
 int tamanho_registro_livro()
 {
-    return sizeof(int) + sizeof(char) * 20 + sizeof(char) * 20 + sizeof(char) * 10 + sizeof(int) + sizeof(char);
+    return sizeof(int) + sizeof(char) * 50 + sizeof(char) * 50 + sizeof(char) * 10 + sizeof(int) + sizeof(char);
 }
 
 int tamanho_arquivo_livros(FILE *arq)
@@ -200,8 +238,8 @@ Livro *criar_livro(int id, char *titulo, char *autor, char *genero, int anoPubli
 void salvar_livro(Livro *livro, FILE *arq)
 {
     fwrite(&livro->id, sizeof(int), 1, arq);
-    fwrite(livro->titulo, sizeof(char), 20, arq);
-    fwrite(livro->autor, sizeof(char), 20, arq);
+    fwrite(livro->titulo, sizeof(char), 50, arq);
+    fwrite(livro->autor, sizeof(char), 50, arq);
     fwrite(livro->genero, sizeof(char), 10, arq);
     fwrite(&livro->anoPublicacao, sizeof(int), 1, arq);
     fwrite(&livro->disponibilidade, sizeof(char), 1, arq);
@@ -215,8 +253,8 @@ Livro *ler_livro(FILE *arq)
         free(livro);
         return NULL;
     }
-    fread(livro->titulo, sizeof(char), 20, arq);
-    fread(livro->autor, sizeof(char), 20, arq);
+    fread(livro->titulo, sizeof(char), 50, arq);
+    fread(livro->autor, sizeof(char), 50, arq);
     fread(livro->genero, sizeof(char), 10, arq);
     fread(&livro->anoPublicacao, sizeof(int), 1, arq);
     fread(&livro->disponibilidade, sizeof(char), 1, arq);
@@ -240,6 +278,7 @@ void criar_base_ordenada_livros(FILE *arq, int tamanho)
     for (int i = 0; i < tamanho; i++)
     {
         livro = criar_livro(vetor[i], "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
+        strcpy(livro->genero, "Cientifico");
         salvar_livro(livro, arq);
     }
     free(livro);
@@ -264,6 +303,7 @@ void criar_base_desordenada_livros(FILE *arq, int tamanho)
     for (int i = 0; i < tamanho; i++)
     {
         livro = criar_livro(vetor[i], "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
+        strcpy(livro->genero, "Cientifico");
         salvar_livro(livro, arq);
     }
     free(livro);

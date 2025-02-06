@@ -635,3 +635,283 @@ Busca binaria - EMPRESTIMO:
 Numero de comparacoes: 12
  Tempo de execucao: 0.00 segundos
 
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 15
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 198
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 4723
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 8
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 6255
+ Tempo de execucao: 0.01 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 4
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 66
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 507
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 1123
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 2
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 7
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 12
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 3
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 8
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 13
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 2
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 7
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 12
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 8
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 8
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 8
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 2
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 7
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 7
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 7
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 4
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 1
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 4
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 2
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - CLIENTE: 
+Numero de comparacoes: 6
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - LIVRO: 
+Numero de comparacoes: 3
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 26
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca binaria - EMPRESTIMO: 
+Numero de comparacoes: 5
+ Tempo de execucao: 0.00 segundos
+

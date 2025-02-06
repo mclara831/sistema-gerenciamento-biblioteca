@@ -3,48 +3,64 @@
 
 void menu_principal()
 {
-    printf("\n******************* MENU DE OPCOES *******************");
-    printf("\n\n Clientes\n");
-    printf("\t1. Registrar um novo cliente\n");
-    printf("\t2. Buscar cliente\n");
-    printf("\t3. Imprimir base de dados de clientes");
+    printf("\n==================================================");
+    printf("\n                  MENU DE OPCOES                 ");
+    printf("\n==================================================");
 
-    printf("\nLivros\n");
-    printf("\t4. Registrar um novo livro\n");
-    printf("\t5. Buscar livro\n");
-    printf("\t6. Imprimir base de dados de livros\n");
-    printf("\t7. Imprimir base de dados de livros disponiveis");
+    printf("\n\nClientes");
+    printf("\n--------------------------------------------------");
+    printf("\n [1] Inserir um novo cliente");
+    printf("\n [2] Atualizar dados de um cliente");
+    printf("\n [3] Buscar cliente");
+    printf("\n [4] Imprimir base de dados de clientes");
 
-    printf("\nEmprestimo\n");
-    printf("\t8. Registrar um novo emprestimo\n");
-    printf("\t9. Realizar devolucao\n");
-    printf("\t10. Renovar emprestimo\n");
-    printf("\t11. Imprimir base de dados de emprestimos\n");
+    printf("\n\nLivros");
+    printf("\n--------------------------------------------------");
+    printf("\n [5] Inserir um novo livro");
+    printf("\n [6] Atualizar dados de um livro");
+    printf("\n [7] Buscar livro");
+    printf("\n [8] Imprimir base de dados de livros");
 
-    printf("\nBase de dados\n");
-    printf("\t12. Gerar base de dados ordenada\n");
-    printf("\t13. Gerar base de dados desordenada\n");
-    printf("\n\t0. Sair\n");
+    printf("\n\nEmprestimos");
+    printf("\n--------------------------------------------------");
+    printf("\n [9] Registrar um novo emprestimo");
+    printf("\n [10] Realizar devolucao");
+    printf("\n [11] Renovar emprestimo");
+    printf("\n [12] Buscar emprestimo");
+    printf("\n [13] Imprimir base de dados de emprestimos");
 
+    printf("\n\nBase de Dados");
+    printf("\n--------------------------------------------------");
+    printf("\n [14] Gerar base de dados ordenada");
+    printf("\n [15] Gerar base de dados desordenada");
+
+    printf("\n\n[0] Sair");
+    printf("\n==================================================");
     printf("\nSelecione uma opcao: ");
 }
 
 void menu_tipo_busca()
 {
-    printf("\n\n1. Busca sequencial\n");
-    printf("2. Busca binaria\n");
+    printf("\n\n[1] Busca sequencial\n");
+    printf("[2] Busca binaria\n");
     printf("Selecione o tipo de busca: ");
 }
+
+/**********************************************************
+                 FUNÇÕES DO CLIENTE
+***********************************************************/
 
 void registrar_novo_cliente(FILE *arq)
 {
     char nome[20], cpf[15];
     fflush(stdin);
     printf("Digite o nome: ");
-    fgets(nome, 20, stdin);
+    scanf("%[^\n]", nome);
+    // fgets(nome, 20, stdin);
     fflush(stdin);
     printf("Digite o cpf(XXX.XXX.XXX-XX): ");
-    fgets(cpf, 15, stdin);
+    scanf("%[^\n]", cpf);
+    // fgets(cpf, 15, stdin);
 
     while (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-')
     {
@@ -79,26 +95,80 @@ void buscar_cliente(FILE *arq)
         scanf("%d", &opcao);
     }
 
+    if (opcao == 2 && ler_status_base() == 0) {
+        printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
+        return;
+    }
+
     (opcao == 1) ? (c = buscar_cliente_sequencial(codigo, arq)) : (c = buscar_cliente_binaria(codigo, arq));
 
     printf("\nDados do cliente encontrado:\n");
     (c != NULL) ? imprimir_cliente(c) : printf("[AVISO]: Cliente nao econtrado na base de dados!\n");
 }
 
+void editar_dados_cliente(FILE *arq) {
+    
+    int codigo;
+    printf("\nDigite o codigo do cliente que voce deseja atualizar: ");
+    scanf("%d", &codigo);
+    Cliente *c = buscar_cliente_sequencial(codigo, arq);
+
+    if (c == NULL)
+    {
+        printf("[AVISO]: Cliente nao encontrado!");
+        return;
+    }
+    
+    char nome[50], cpf[15];
+    fflush(stdin);
+    printf("Digite o nome: ");
+    scanf("%[^\n]", nome);
+    // fgets(nome, 20, stdin);
+    fflush(stdin);
+    printf("Digite o cpf(XXX.XXX.XXX-XX): ");
+    scanf("%[^\n]", cpf);
+    // fgets(cpf, 15, stdin);
+
+    while (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-')
+    {
+        printf("\n\n[AVISO]: Dados digitados incorretamente! Tente novamente!\n");
+        fflush(stdin);
+        printf("Digite o cpf(XXX.XXX.XXX-XX): ");
+        fgets(cpf, 14, stdin);
+    }
+
+    int posicao = posicao_cliente(c, arq);
+    Cliente *cliente = criar_cliente(c->id, nome, cpf);
+    fseek(arq, tamanho_registro_cliente() * posicao, SEEK_SET);
+    salvar_cliente(cliente, arq);
+
+    printf("Cliente atualizado com sucesso!\n");
+    imprimir_cliente(cliente);
+    free(c);
+    fflush(stdin);
+}
+
+/**********************************************************
+                 FUNÇÕES DO LIVRO
+***********************************************************/
+
 void registrar_novo_livro(FILE *arq)
 {
-    char titulo[20], autor[20], genero[10], disponibilidade;
+    char titulo[50], autor[50], genero[10], disponibilidade;
     int anoPublicacao;
 
     printf("\nDigite o titulo do livro: ");
     fflush(stdin);
-    fgets(titulo, 20, stdin);
+    scanf("%[^\n]", titulo);
+    // fgets(titulo, 50, stdin);
     printf("\nDigite o autor do livro: ");
     fflush(stdin);
-    fgets(autor, 20, stdin);
+    scanf("%[^\n]", autor);
+    // fgets(autor, 50, stdin);
     printf("\nDigite o genero: ");
     fflush(stdin);
-    fgets(genero, 10, stdin);
+    scanf("%[^\n]", genero);
+    // fgets(genero, 10, stdin);
     printf("Digite o ano de publicacao: ");
     scanf("%d", &anoPublicacao);
     printf("Disponivel(s/n): ");
@@ -136,11 +206,71 @@ void buscar_livro(FILE *arq)
         scanf("%d", &opcao);
     }
 
+    if (opcao == 2 && ler_status_base() == 0) {
+        printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
+        return;
+    }
+
     (opcao == 1) ? (l = buscar_livro_sequencial(codigo, arq)) : (l = buscar_livro_binaria(codigo, arq));
 
     printf("\nDados do livro encontrado:\n");
     (l != NULL) ? imprimir_livro(l) : printf("[AVISO]: Livro nao encontrado na base de dados!\n");
 }
+
+void editar_dados_livro(FILE *arq)
+{
+    int codigo;
+    printf("\nDigite o codigo do livro que voce deseja atualizar: ");
+    scanf("%d", &codigo);
+    Livro *l = buscar_livro_sequencial(codigo, arq);
+
+    if (l == NULL)  
+    {
+        printf("[AVISO]: Livro nao encontrado!");
+        return;
+    }
+    
+    char titulo[50], autor[50], genero[10], disponibilidade;
+    int anoPublicacao;
+
+    printf("\nDigite o titulo do livro: ");
+    fflush(stdin);
+    scanf("%[^\n]", titulo);
+    // fgets(titulo, 50, stdin);
+    printf("\nDigite o autor do livro: ");
+    fflush(stdin);
+    scanf("%[^\n]", autor);
+    // fgets(autor, 50, stdin);
+    printf("\nDigite o genero: ");
+    fflush(stdin);
+    scanf("%[^\n]", genero);
+    // fgets(genero, 10, stdin);
+    printf("Digite o ano de publicacao: ");
+    scanf("%d", &anoPublicacao);
+    printf("Disponivel(s/n): ");
+    fflush(stdin);
+    scanf("%c", &disponibilidade);
+    while (disponibilidade != 's' && disponibilidade != 'n')
+    {
+        printf("\n\n[AVISO]: Dados digitados incorretamente! Tente novamente!\n");
+        printf("Disponivel(s/n): ");
+        fflush(stdin);
+        scanf("%c", &disponibilidade);
+    }
+
+    int posicao = posicao_livro(l, arq);
+    Livro *livro = criar_livro(l->id, titulo, autor, genero, anoPublicacao, disponibilidade);
+    fseek(arq, tamanho_registro_livro() * posicao, SEEK_SET);
+    salvar_livro(livro, arq);
+
+    printf("Livro atualizado com sucesso!\n");
+    imprimir_livro(livro);
+    free(l);
+}
+
+/**********************************************************
+                FUNÇÕES DO EMPREÉSTIMO
+***********************************************************/
 
 void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq)
 {
@@ -211,7 +341,7 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
 
     if (e->devolvido == 's')
     {
-        printf("\nEmprestimo ja realizado!\n");
+        printf("\n[AVISO]: Emprestimo ja finalizado!\n");
         return;
     }
 
@@ -278,15 +408,29 @@ void renovar_emprestimo(FILE *emp_arq)
     liberar_emprestimo(emp);
 }
 
-void imprimir_livros_disponiveis(FILE *livros_arq) {
-    rewind(livros_arq);
-    Livro *livro;
-    while ((livro = ler_livro(livros_arq)) != NULL)
+void buscar_emprestimo(FILE *arq)
+{
+    Emprestimo *e;
+    int opcao, codigo;
+    printf("\nDigite o codigo do emprestimo buscado: ");
+    scanf("%d", &codigo);
+    menu_tipo_busca();
+    scanf("%d", &opcao);
+
+    while (opcao != 1 && opcao != 2)
     {
-        if (livro->disponibilidade == 's')
-        {
-            imprimir_livro(livro); 
-        }
+        printf("[AVISO]: Opcao invalida! Digite novamente!");
+        menu_tipo_busca();
+        scanf("%d", &opcao);
     }
-    free(livro);
+
+    if (opcao == 2 && ler_status_base() == 0) {
+        printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
+        return;
+    }
+
+    (opcao == 1) ? (e = buscar_emprestimo_sequencial(codigo, arq)) : (e = buscar_emprestimo_binaria(codigo, arq));
+
+    printf("\nDados do livro encontrado:\n");
+    (e != NULL) ? imprimir_emprestimo(e) : printf("[AVISO]: Emprestimo nao encontrado na base de dados!\n");
 }

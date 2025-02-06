@@ -8,17 +8,17 @@
 #include <time.h>
 
 typedef struct TCliente
-{
+{   
     int id;
-    char nome[20];
+    char nome[50];
     char cpf[15];
 } Cliente;
 
 typedef struct TLivro
 {
     int id;
-    char titulo[20];
-    char autor[20];
+    char titulo[50];
+    char autor[50];
     char genero[10];
     int anoPublicacao;
     char disponibilidade;
@@ -59,6 +59,7 @@ void criar_base_ordenada_clientes(FILE *arq, int tamanho);
 void criar_base_desordenada_clientes(FILE *arq, int tamanho);
 void imprimir_cliente(Cliente *cliente);
 void imprimir_base_clientes(FILE *arq);
+int posicao_cliente(Cliente *cliente, FILE *arq);
 
 /**********************************************************
                  FUNÇÕES DO LIVRO

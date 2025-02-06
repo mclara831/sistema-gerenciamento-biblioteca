@@ -25,7 +25,7 @@ int main(void)
     /**************************************************************************
                 TESTES DAS BASES DAS ENTIDADES COM DIFERENTES TAMANHOS
     ***************************************************************************/
-    int tam = 10;
+    /*int tam = 10;
     for (int i = 0; i < 4; i++)
     {
         if ((clientes_arq = fopen("arq_clientes.dat", "w+b")) == NULL)
@@ -109,10 +109,10 @@ int main(void)
         tam = tam * 10;
     }
 
-    system("pause");
+    system("pause");*/
 
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
-    criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 5);
+    criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 100);
 
     int opcao = 0, continuar = 1, tamanho;
 
@@ -133,48 +133,53 @@ int main(void)
             registrar_novo_cliente(clientes_arq);
             break;
         case 2:
-            buscar_cliente(clientes_arq);
+            editar_dados_cliente(clientes_arq);
             break;
         case 3:
-            imprimir_base_clientes(clientes_arq);
+            buscar_cliente(clientes_arq);
             break;
         case 4:
-            registrar_novo_livro(livros_arq);
+            imprimir_base_clientes(clientes_arq);
             break;
         case 5:
-            buscar_livro(livros_arq);
+            registrar_novo_livro(livros_arq);
             break;
         case 6:
-            imprimir_base_livros(livros_arq);
+            editar_dados_livro(livros_arq);
             break;
         case 7:
-            imprimir_livros_disponiveis(livros_arq);
+            buscar_livro(livros_arq);
             break;
         case 8:
-            registrar_novo_emprestimo(clientes_arq, livros_arq, emprestimos_arq);
+            imprimir_base_livros(livros_arq);
             break;
         case 9:
-            realizar_devolucao(emprestimos_arq, livros_arq);
+            registrar_novo_emprestimo(clientes_arq, livros_arq, emprestimos_arq);
             break;
         case 10:
-            renovar_emprestimo(emprestimos_arq);
+            realizar_devolucao(emprestimos_arq, livros_arq);
             break;
         case 11:
-            imprimir_base_emprestimos(emprestimos_arq);
+            renovar_emprestimo(emprestimos_arq);
             break;
         case 12:
+            buscar_emprestimo(emprestimos_arq);
+            break;
+        case 13:
+            imprimir_base_emprestimos(emprestimos_arq);
+            break;
+        case 14:
             printf("Digite o tamanho da base de dados que deseja criar: ");
             scanf("%d", &tamanho);
             criar_bases_ordenadas(clientes_arq, livros_arq, emprestimos_arq, tamanho);
             break;
-        case 13:
+        case 15:
             printf("Digite o tamanho da base de dados que deseja criar: ");
             scanf("%d", &tamanho);
             criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, tamanho);
-            printf("\n[AVISO]: AO CRIAR A BASE DE DADOS DESORDENADA E POSSIVEL QUE A BUSCA BINARIA NAO RETORNA DE DE FORMA CORRETA OS DADOS DA ENTIDADE PROCURADA!\n\n");
             break;
         default:
-            printf("Opcao invalida! Digite novamente!\n");
+            printf("[AVISO]: Opcao invalida! Digite novamente!\n");
             break;
         }
     }
