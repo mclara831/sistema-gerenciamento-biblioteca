@@ -1,0 +1,90 @@
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 29
+Numero de comparacoes: 19
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 23
+Numero de comparacoes: 16
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 616
+Numero de comparacoes: 431
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 4950
+Numero de comparacoes: 5049
+Tempo de execucao: 0.14 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 616
+Numero de comparacoes: 431
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 616
+Numero de comparacoes: 431
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 24875
+Numero de comparacoes: 14315
+Tempo de execucao: 0.41 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 24875
+Numero de comparacoes: 14315
+Tempo de execucao: 0.44 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 24875
+Numero de comparacoes: 14315
+Tempo de execucao: 0.46 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 148999
+Numero de comparacoes: 77873
+Tempo de execucao: 2.34 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 148999
+Numero de comparacoes: 77873
+Tempo de execucao: 2.11 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 156559
+Numero de comparacoes: 89459
+Tempo de execucao: 2.14 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 585
+Numero de comparacoes: 337
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 585
+Numero de comparacoes: 337
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 585
+Numero de comparacoes: 337
+Tempo de execucao: 0.02 segundos
+

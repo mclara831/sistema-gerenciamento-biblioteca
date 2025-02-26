@@ -1,5 +1,6 @@
 #include "cli.h"
 #include "../buscas/busca_binaria.c"
+#include "../metodos_ordenacao/quickSort.c"
 
 void menu_principal()
 {
@@ -33,6 +34,7 @@ void menu_principal()
     printf("\n--------------------------------------------------");
     printf("\n [14] Gerar base de dados ordenada");
     printf("\n [15] Gerar base de dados desordenada");
+    printf("\n [16] Ordenar bases de dados");
 
     printf("\n\n[0] Sair");
     printf("\n==================================================");
@@ -71,6 +73,7 @@ void registrar_novo_cliente(FILE *arq)
     }
 
     Cliente *c = criar_cliente(tamanho_arquivo_clientes(arq) + 1, nome, cpf);
+    fseek(arq, 0, SEEK_END);
     salvar_cliente(c, arq);
 
     printf("Cliente cadastrado com sucesso!\n");
@@ -183,6 +186,7 @@ void registrar_novo_livro(FILE *arq)
     }
 
     Livro *l = criar_livro(tamanho_arquivo_livros(arq) + 1, titulo, autor, genero, anoPublicacao, disponibilidade);
+    fseek(arq, 0, SEEK_END);
     salvar_livro(l, arq);
 
     printf("Livro cadastrado com sucesso!\n");
@@ -269,7 +273,7 @@ void editar_dados_livro(FILE *arq)
 }
 
 /**********************************************************
-                FUNÇÕES DO EMPREÉSTIMO
+                FUNÇÕES DO EMPRÉSTIMO
 ***********************************************************/
 
 void registrar_novo_emprestimo(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq)
@@ -433,4 +437,41 @@ void buscar_emprestimo(FILE *arq)
 
     printf("\nDados do livro encontrado:\n");
     (e != NULL) ? imprimir_emprestimo(e) : printf("[AVISO]: Emprestimo nao encontrado na base de dados!\n");
+}
+
+/**********************************************************
+                FUNÇÕES DA BASE DE DADOS
+***********************************************************/
+
+void iniciar_ordenacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq) {
+    printf("\n\n[1] Ordenar base de clientes\n");
+    printf("[2] Ordenar base de livros\n");
+    printf("[3] Ordenar base de emprestimos\n");
+    printf("[4] Ordenar todas as bases\n");
+    printf("Selecione o tipo de busca: ");
+    int opcao;
+    scanf("%d", &opcao);
+
+    switch (opcao)
+    {
+    case 1:
+        quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
+        break;
+    case 2:
+        quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
+        break;
+    case 3:
+        quick_sort_com_logs(emp_arq, 0, tamanho_arquivo_emprestimos(emp_arq) - 1, 3);
+        break;
+    case 4:
+        quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
+        quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
+        quick_sort_com_logs(emp_arq, 0, tamanho_arquivo_emprestimos(emp_arq) - 1, 3);
+        break;
+    default:
+        printf("[AVISO]: Opcao invalida!\n");
+        break;
+    }
+    
+    printf("[SUCESSO] Ordenação realizada com sucesso!\n");
 }

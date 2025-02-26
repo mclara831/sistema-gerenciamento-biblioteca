@@ -1,4 +1,5 @@
 #include "interface/cli.c"
+#include "metodos_ordenacao/quickSort.c"
 
 int main(void)
 {
@@ -177,6 +178,9 @@ int main(void)
             printf("Digite o tamanho da base de dados que deseja criar: ");
             scanf("%d", &tamanho);
             criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, tamanho);
+            break;
+        case 16:
+            iniciar_ordenacao(clientes_arq, livros_arq, emprestimos_arq);
             break;
         default:
             printf("[AVISO]: Opcao invalida! Digite novamente!\n");
