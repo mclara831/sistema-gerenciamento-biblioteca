@@ -1,0 +1,30 @@
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.23 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.20 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.17 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.03 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.06 segundos
+

@@ -3,7 +3,7 @@
 FILE *logs;
 
 void salvar_informacoes_logs(char *descricao, int numero_comparacoes, double tempo) {
-    logs = fopen("logs.txt", "a");
+    logs = fopen("logs/logs_busca.txt", "a");
     if (logs == NULL)
     {
         printf("Erro ao abrir o ficheiro de logs.\n");

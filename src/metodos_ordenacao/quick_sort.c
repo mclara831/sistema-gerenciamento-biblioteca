@@ -1,16 +1,16 @@
-#ifndef QUICKSORT_C
-#define QUICKSORT_C
+#ifndef QUICK_SORT_C
+#define QUICK_SORT_C
 #include "../entities/entidades.h"
 
 void salvar_informacoes_logs_ordenacao(char *descricao, int numero_comparacoes, int numero_trocas, double tempo) {
-    logs = fopen("logs_ordenacao.txt", "a");
+    FILE* logs = fopen("logs/logs_ordenacao.txt", "a");
     if (logs == NULL)
     {
         printf("Erro ao abrir o ficheiro de logs.\n");
         return;
     }
 
-    fprintf(logs, "*****************************************\n%s: \nNumero de comparacoes: %d\nNumero de comparacoes: %d\nTempo de execucao: %.2f segundos\n\n",descricao, numero_comparacoes, numero_trocas, tempo);
+    fprintf(logs, "*****************************************\n%s: \nNumero de comparacoes: %d\nNumero de trocas: %d\nTempo de execucao: %.2f segundos\n\n",descricao, numero_comparacoes, numero_trocas, tempo);
     fclose(logs);
 }
 

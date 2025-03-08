@@ -1,0 +1,30 @@
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 5
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de comparacoes: 5
+Tempo de execucao: 0.01 segundos
+

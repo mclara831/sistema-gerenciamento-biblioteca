@@ -1,6 +1,6 @@
 #include "cli.h"
 #include "../buscas/busca_binaria.c"
-#include "../metodos_ordenacao/quickSort.c"
+#include "../metodos_ordenacao/quick_sort.c"
 
 void menu_principal()
 {
