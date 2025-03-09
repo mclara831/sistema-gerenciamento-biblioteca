@@ -190,4 +190,11 @@ void quick_sort_com_logs(FILE *arq, int inicio, int final, int tipo) {
 
 }
 
+void quick_sort_todas_entidades(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq)
+{
+    quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
+    quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
+    quick_sort_com_logs(emp_arq, 0, tamanho_arquivo_emprestimos(emp_arq) - 1, 3);
+    salvar_status_base(1);
+}
 #endif

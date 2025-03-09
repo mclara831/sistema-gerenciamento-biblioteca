@@ -1,30 +1,50 @@
 *****************************************
 Seleção natural - CLIENTE: 
-Numero de comparacoes: 6
+Numero de particoes criadas: 6
+Tempo de execucao: 0.05 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.05 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 6
 Tempo de execucao: 0.02 segundos
 
 *****************************************
 Seleção natural - CLIENTE: 
-Numero de comparacoes: 6
+Numero de particoes criadas: 6
 Tempo de execucao: 0.02 segundos
 
 *****************************************
-Seleção natural - CLIENTE: 
-Numero de comparacoes: 5
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
 Tempo de execucao: 0.01 segundos
 
 *****************************************
 Seleção natural - CLIENTE: 
-Numero de comparacoes: 6
+Numero de particoes criadas: 5
 Tempo de execucao: 0.02 segundos
 
 *****************************************
-Seleção natural - CLIENTE: 
-Numero de comparacoes: 6
-Tempo de execucao: 0.02 segundos
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.03 segundos
 
 *****************************************
-Seleção natural - CLIENTE: 
-Numero de comparacoes: 5
-Tempo de execucao: 0.01 segundos
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.02 segundos
 

@@ -28,3 +28,83 @@ Intercalacao Otima - CLIENTE:
 Numero de comparacoes: 500
 Tempo de execucao: 0.06 segundos
 
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.15 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.08 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.05 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.08 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - EMPRESTIMO: 
+Numero de comparacoes: 0
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 600
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - EMPRESTIMO: 
+Numero de comparacoes: 84
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - EMPRESTIMO: 
+Numero de comparacoes: 500
+Tempo de execucao: 0.01 segundos
+

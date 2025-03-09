@@ -1,6 +1,8 @@
 #include "cli.h"
 #include "../buscas/busca_binaria.c"
 #include "../metodos_ordenacao/quick_sort.c"
+#include "../metodos_ordenacao/selecao_natural.c"
+#include "../metodos_ordenacao/intercalacao_otima.c"
 
 void menu_principal()
 {
@@ -442,31 +444,37 @@ void buscar_emprestimo(FILE *arq)
 /**********************************************************
                 FUNÇÕES DA BASE DE DADOS
 ***********************************************************/
+void classificao_e_intercalacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, int tam_particao)
+{
+    // Clientes
+    int n_particoes = selecao_natural_clientes(clientes_arq, tam_particao);
+    intercalacao_otima_clientes(n_particoes, clientes_arq);
+    // Livros
+    n_particoes = selecao_natural_livros(livros_arq, tam_particao);
+    intercalacao_otima_livros(n_particoes, livros_arq);
+    //Emprestimos
+    n_particoes = selecao_natural_emp(emp_arq, tam_particao);
+    intercalacao_otima_emprestimos(n_particoes, emp_arq);
+    salvar_status_base(1);
+}
 
 void iniciar_ordenacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq) {
-    printf("\n\n[1] Ordenar base de clientes\n");
-    printf("[2] Ordenar base de livros\n");
-    printf("[3] Ordenar base de emprestimos\n");
-    printf("[4] Ordenar todas as bases\n");
-    printf("Selecione o tipo de busca: ");
+    printf("\n\n[1] Ordenar pelo QuickSort\n");
+    printf("[2] Ordenar pela classificacao e intercalacao\n");
+    printf("Selecione o tipo de ordenacao: ");
     int opcao;
     scanf("%d", &opcao);
 
     switch (opcao)
     {
     case 1:
-        quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
+        quick_sort_todas_entidades(clientes_arq, livros_arq, emp_arq);
         break;
     case 2:
-        quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
-        break;
-    case 3:
-        quick_sort_com_logs(emp_arq, 0, tamanho_arquivo_emprestimos(emp_arq) - 1, 3);
-        break;
-    case 4:
-        quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
-        quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
-        quick_sort_com_logs(emp_arq, 0, tamanho_arquivo_emprestimos(emp_arq) - 1, 3);
+        printf("\nDigite o tamanho do reservatorio: ");
+        int tam;
+        scanf("%d", &tam);
+        classificao_e_intercalacao(clientes_arq, livros_arq, emp_arq, tam);
         break;
     default:
         printf("[AVISO]: Opcao invalida!\n");

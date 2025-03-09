@@ -117,15 +117,6 @@ int main(void)
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
     criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 100);
 
-    int total_particoes = selecao_natural_clientes(clientes_arq, 11);
-    printf("Total de particoes: %d\n", total_particoes);
-    intercalacao_otima_clientes(total_particoes, clientes_arq);
-    imprimir_base_clientes(clientes_arq);
-
-    return 0;
-
-    system("pause");
-
     int opcao = 0, continuar = 1, tamanho;
 
     printf("**************** BEM VINDO AO SISTEMA DE GERENCIAMENTO DE BIBLIOTECA ************************");

@@ -1,3 +1,5 @@
+#ifndef ENTIDADES_C
+#define ENTIDADES_C
 #include "entidades.h"
 
 /**********************************************************
@@ -15,9 +17,11 @@ void shuffle(int *vet, int tamanho_maximo)
     }
 }
 
-void salvar_status_base(int ordenada) {
+void salvar_status_base(int ordenada)
+{
     FILE *status_arq = fopen("status.txt", "w");
-    if (status_arq == NULL) {
+    if (status_arq == NULL)
+    {
         printf("Erro ao abrir o arquivo de status!\n");
         return;
     }
@@ -25,9 +29,11 @@ void salvar_status_base(int ordenada) {
     fclose(status_arq);
 }
 
-int ler_status_base() {
+int ler_status_base()
+{
     FILE *status_arq = fopen("status.txt", "r");
-    if (status_arq == NULL) {
+    if (status_arq == NULL)
+    {
         return 0; // Se o arquivo não existir, consideramos desordenada
     }
     int ordenada;
@@ -38,7 +44,7 @@ int ler_status_base() {
 
 void criar_bases_ordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, int tamanho)
 {
-    salvar_status_base(1); 
+    salvar_status_base(1);
     criar_base_ordenada_clientes(clientes_arq, tamanho);
     criar_base_ordenada_livros(livros_arq, tamanho);
     criar_base_ordenada_emprestimos(emp_arq, tamanho);
@@ -46,7 +52,7 @@ void criar_bases_ordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, 
 
 void criar_bases_desordenadas(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq, int tamanho)
 {
-    salvar_status_base(0); 
+    salvar_status_base(0);
     criar_base_desordenada_clientes(clientes_arq, tamanho);
     criar_base_desordenada_livros(livros_arq, tamanho);
     criar_base_desordenada_emprestimos(emp_arq, tamanho);
@@ -189,11 +195,13 @@ void imprimir_base_clientes(FILE *arq)
     free(cliente);
 }
 
-int posicao_cliente(Cliente *cliente, FILE *arq) {
+int posicao_cliente(Cliente *cliente, FILE *arq)
+{
     rewind(arq);
     Cliente *c;
     int posicao = 0;
-    while ((c = ler_cliente(arq)) != NULL) {
+    while ((c = ler_cliente(arq)) != NULL)
+    {
         if (cliente->id == c->id)
         {
             break;
@@ -338,11 +346,13 @@ void imprimir_base_livros(FILE *arq)
     free(livro);
 }
 
-int posicao_livro(Livro *livro, FILE *arq) {
+int posicao_livro(Livro *livro, FILE *arq)
+{
     rewind(arq);
     Livro *l;
     int posicao = 0;
-    while ((l = ler_livro(arq)) != NULL) {
+    while ((l = ler_livro(arq)) != NULL)
+    {
         if (livro->id == l->id)
         {
             break;
@@ -358,7 +368,7 @@ int posicao_livro(Livro *livro, FILE *arq) {
 ***********************************************************/
 int tamanho_registro_emprestimo()
 {
-    return sizeof(int) + sizeof(Livro) + sizeof(Cliente) + sizeof(struct tm) + sizeof(struct tm) + sizeof(double) + sizeof(char) + + sizeof(double) + sizeof(char);
+    return sizeof(int) + sizeof(Livro) + sizeof(Cliente) + sizeof(struct tm) + sizeof(struct tm) + sizeof(double) + sizeof(char) + +sizeof(double) + sizeof(char);
 }
 
 int tamanho_arquivo_emprestimos(FILE *arq)
@@ -467,7 +477,7 @@ void criar_base_desordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
         vetor[i] = i + 1;
-    
+
     shuffle(vetor, tamanho);
 
     struct tm data_emp = criar_data();
@@ -503,7 +513,8 @@ void imprimir_emprestimo(Emprestimo *emprestimo)
     printf("R$%.2f", emprestimo->valor);
     printf("\nDevolvido: ");
     printf("%c", emprestimo->devolvido);
-    if (emprestimo->multa > 0) {
+    if (emprestimo->multa > 0)
+    {
         printf("\nValor da multa: ");
         printf("R$%.2f", emprestimo->multa);
     }
@@ -523,11 +534,13 @@ void imprimir_base_emprestimos(FILE *arq)
     }
 }
 
-int posicao_emprestimo(Emprestimo *emprestimo, FILE *arq) {
+int posicao_emprestimo(Emprestimo *emprestimo, FILE *arq)
+{
     rewind(arq);
     Emprestimo *e;
     int posicao = 0;
-    while ((e = ler_emprestimo(arq)) != NULL) {
+    while ((e = ler_emprestimo(arq)) != NULL)
+    {
         if (emprestimo->id == e->id)
         {
             break;
@@ -537,7 +550,8 @@ int posicao_emprestimo(Emprestimo *emprestimo, FILE *arq) {
     return posicao;
 }
 
-double calcular_multa(Emprestimo *emprestimo) {
+double calcular_multa(Emprestimo *emprestimo)
+{
     struct tm data_prev = emprestimo->data_prevista;
     struct tm data_atual = criar_data();
     // struct tm *data_atual2 = adicionar_dias(&data_atual, 1);
@@ -545,12 +559,14 @@ double calcular_multa(Emprestimo *emprestimo) {
     time_t t_prevista = mktime(&data_prev);
     time_t t_atual = mktime(&data_atual);
 
-    double diferenca = difftime(t_atual, t_prevista) / 86400; 
+    double diferenca = difftime(t_atual, t_prevista) / 86400;
     printf("%d", (int)diferenca);
-    
+
     if (diferenca > 0)
     {
         return (int)diferenca;
     }
     return 0;
 }
+
+#endif
