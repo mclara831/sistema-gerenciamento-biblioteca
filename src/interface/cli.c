@@ -2,7 +2,7 @@
 #include "../buscas/busca_binaria.c"
 #include "../metodos_ordenacao/quick_sort.c"
 #include "../metodos_ordenacao/selecao_natural.c"
-#include "../metodos_ordenacao/intercalacao_otima.c"
+#include "../metodos_ordenacao/intercalacao_otima2.c"
 
 void menu_principal()
 {
@@ -448,13 +448,21 @@ void classificao_e_intercalacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_
 {
     // Clientes
     int n_particoes = selecao_natural_clientes(clientes_arq, tam_particao);
-    intercalacao_otima_clientes(n_particoes, clientes_arq);
+    printf("Digite o numero de arquivo que você deseja manipular(deve ser menor que %d): ", n_particoes);
+    int num;
+    scanf("%d", &num);
+    if (num > n_particoes)
+    {
+        printf("O numero digitado foi maior que o numero de particoes existentes!");
+        return;
+    }
+    intercalacao_otima_clientes2(num, n_particoes, clientes_arq);
     // Livros
     n_particoes = selecao_natural_livros(livros_arq, tam_particao);
-    intercalacao_otima_livros(n_particoes, livros_arq);
+    intercalacao_otima_livros2(num, n_particoes, livros_arq);
     //Emprestimos
     n_particoes = selecao_natural_emp(emp_arq, tam_particao);
-    intercalacao_otima_emprestimos(n_particoes, emp_arq);
+    intercalacao_otima_emprestimos2(num, n_particoes, emp_arq);
     salvar_status_base(1);
 }
 

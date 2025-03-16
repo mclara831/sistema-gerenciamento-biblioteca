@@ -1,0 +1,10 @@
+*****************************************
+Busca sequencial - EMPRESTIMO: 
+Numero de comparacoes: 79
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - LIVRO: 
+Numero de comparacoes: 92
+ Tempo de execucao: 0.00 segundos
+

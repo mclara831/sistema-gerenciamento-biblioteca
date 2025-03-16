@@ -2,7 +2,7 @@
 #define INTERCALACAO_OTIMA_C
 #include "../entities/entidades.h"
 
-void salvar_informacoes_logs_io(char *descricao, int contador, double tempo)
+void salvar_informacoes_logs_io(char *descricao, int part, double tempo)
 {
     FILE *logs = fopen("logs/logs_intercalcacao.txt", "a");
     if (logs == NULL)
@@ -11,7 +11,7 @@ void salvar_informacoes_logs_io(char *descricao, int contador, double tempo)
         return;
     }
 
-    fprintf(logs, "*****************************************\n%s: \nNumero de comparacoes: %d\nTempo de execucao: %.2f segundos\n\n", descricao, contador, tempo);
+    fprintf(logs, "*****************************************\n%s: \nNumero de particoes criadas: %d\nTempo de execucao: %.2f segundos\n\n", descricao, part, tempo);
     fclose(logs);
 }
 
@@ -24,22 +24,24 @@ void copiar_dados(FILE *origem, FILE *destino, int tipo)
     if (tipo == 1)
     {
         Cliente *dado;
-        while((dado = ler_cliente(origem)) != NULL)
+        while ((dado = ler_cliente(origem)) != NULL)
         {
             salvar_cliente(dado, destino);
             free(dado);
         }
     }
-    else if(tipo == 2)
+    else if (tipo == 2)
     {
         Livro *dado;
-        while((dado = ler_livro(origem)) != NULL)
+        while ((dado = ler_livro(origem)) != NULL)
         {
             salvar_livro(dado, destino);
         }
-    } else {
+    }
+    else
+    {
         Emprestimo *dado;
-        while((dado = ler_emprestimo(origem)) != NULL)
+        while ((dado = ler_emprestimo(origem)) != NULL)
         {
             salvar_emprestimo(dado, destino);
         }
@@ -144,7 +146,7 @@ void intercalacao_otima_clientes(int total_particoes, FILE *arq)
 
     double tempoFinal = clock();
     double tempoDeExecucao = (tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
-    
+
     salvar_informacoes_logs_io("Intercalacao Otima - CLIENTE", contador, tempoDeExecucao);
     copiar_dados(arq_final, arq, 1);
     fclose(arq_final);
@@ -202,7 +204,7 @@ void intercalacao_otima_livros(int total_particoes, FILE *arq)
         livros[menorIndice] = ler_livro(particoes[menorIndice]);
         reg++;
     }
-    
+
     for (i = 0; i < total_particoes; i++)
     {
         fclose(particoes[i]);
@@ -212,7 +214,7 @@ void intercalacao_otima_livros(int total_particoes, FILE *arq)
 
     double tempoFinal = clock();
     double tempoDeExecucao = (tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
-    
+
     salvar_informacoes_logs_io("Intercalacao Otima - LIVRO", contador, tempoDeExecucao);
     copiar_dados(arq_final, arq, 2);
     fclose(arq_final);
@@ -270,7 +272,7 @@ void intercalacao_otima_emprestimos(int total_particoes, FILE *arq)
         emprestimos[menorIndice] = ler_emprestimo(particoes[menorIndice]);
         reg++;
     }
-    
+
     for (i = 0; i < total_particoes; i++)
     {
         fclose(particoes[i]);
@@ -280,7 +282,7 @@ void intercalacao_otima_emprestimos(int total_particoes, FILE *arq)
 
     double tempoFinal = clock();
     double tempoDeExecucao = (tempoFinal - tempoInicial) / CLOCKS_PER_SEC;
-    
+
     salvar_informacoes_logs_io("Intercalacao Otima - EMPRESTIMO", contador, tempoDeExecucao);
     copiar_dados(arq_final, arq, 3);
     fclose(arq_final);

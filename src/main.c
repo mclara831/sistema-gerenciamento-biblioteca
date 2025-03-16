@@ -2,6 +2,7 @@
 #include "metodos_ordenacao/quick_sort.c"
 #include "metodos_ordenacao/selecao_natural.c"
 #include "metodos_ordenacao/intercalacao_otima.c"
+#include "metodos_ordenacao/intercalacao_otima2.c"
 
 int main(void)
 {
@@ -37,7 +38,12 @@ int main(void)
             exit(1);
         }
         criar_base_desordenada_clientes(clientes_arq, tam);
-        buscar_cliente_sequencial(3*(tam/10), clientes_arq);
+        // quick_sort_com_logs(clientes_arq, 0, tamanho_arquivo_clientes(clientes_arq) - 1, 1);
+        srand(time(NULL));
+        int tam_particao = rand() % (tam/2);
+        printf("%d", tam_particao);
+        int n_particoes = selecao_natural_clientes(clientes_arq, tam_particao);
+        intercalacao_otima_clientes2(n_particoes/2, n_particoes, clientes_arq);
         fclose(clientes_arq);
         tam = tam * 10;
     }
@@ -51,7 +57,11 @@ int main(void)
             exit(1);
         }
         criar_base_desordenada_livros(livros_arq, tam);
-        buscar_livro_sequencial(7*(tam/10), livros_arq);
+        // quick_sort_com_logs(livros_arq, 0, tamanho_arquivo_livros(livros_arq) - 1, 2);
+        srand(time(NULL));
+        int tam_particao = rand() % (tam/2);
+        int n_particoes = selecao_natural_livros(livros_arq, tam_particao);
+        intercalacao_otima_livros2(n_particoes/2, n_particoes, livros_arq);
         fclose(livros_arq);
         tam = tam * 10;
     }
@@ -65,57 +75,21 @@ int main(void)
             exit(1);
         }
         criar_base_desordenada_emprestimos(livros_arq, tam);
-        buscar_emprestimo_sequencial(8*(tam/10), livros_arq);
+        // quick_sort_com_logs(emprestimos_arq, 0, tamanho_arquivo_emprestimos(emprestimos_arq) - 1, 3);
+        srand(time(NULL));
+        int tam_particao = rand() % (tam/2);
+        int n_particoes = selecao_natural_emp(emprestimos_arq, tam_particao);
+        intercalacao_otima_emprestimos2(n_particoes/2, n_particoes, emprestimos_arq);
         fclose(emprestimos_arq);
         tam = tam * 10;
     }
-
-    tam = 10;
-    for (int i = 0; i < 4; i++)
-    {
-        if ((clientes_arq = fopen("arq_clientes.dat", "w+b")) == NULL)
-        {
-            printf("[ERRO]: Não foi possivel abrir o arquivo de clientes!");
-            exit(1);
-        }
-        criar_base_ordenada_clientes(clientes_arq, tam);
-        buscar_cliente_binaria(3*(tam/10), clientes_arq);
-        fclose(clientes_arq);
-        tam = tam * 10;
-    }
-
-    tam = 10;
-    for (int i = 0; i < 4; i++)
-    {
-        if ((livros_arq = fopen("arq_livros.dat", "w+b")) == NULL)
-        {
-            printf("[ERRO]: Não foi possivel abrir o arquivo de livros!");
-            exit(1);
-        }
-        criar_base_ordenada_livros(livros_arq, tam);
-        buscar_livro_binaria(7*(tam/10), livros_arq);
-        fclose(livros_arq);
-        tam = tam * 10;
-    }
-
-    tam = 10;
-    for (int i = 0; i < 4; i++)
-    {
-        if ((emprestimos_arq = fopen("arq_emprestimos.dat", "w+b")) == NULL)
-        {
-            printf("[ERRO]: Não foi possivel abrir o arquivo de emprestimos!");
-            exit(1);
-        }
-        criar_base_ordenada_emprestimos(livros_arq, tam);
-        buscar_emprestimo_binaria(3*(tam/10), livros_arq);
-        fclose(emprestimos_arq);
-        tam = tam * 10;
-    }
-
     system("pause");*/
 
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
     criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 100);
+    // int n_particoes = selecao_natural_clientes(clientes_arq, 11);
+    // intercalacao_otima_clientes2(n_particoes, clientes_arq);
+    // system("pause");
 
     int opcao = 0, continuar = 1, tamanho;
 

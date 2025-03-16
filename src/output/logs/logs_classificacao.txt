@@ -1,31 +1,154 @@
+**********TESTES NAS BASES DE DADOS DESORDENADAS DE DIFERENTES TAMANHOS**************
 *****************************************
 Seleção natural - CLIENTE: 
-Numero de particoes criadas: 6
-Tempo de execucao: 0.05 segundos
-
-*****************************************
-Seleção natural - LIVRO: 
-Numero de particoes criadas: 6
-Tempo de execucao: 0.05 segundos
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
 
 *****************************************
 Seleção natural - CLIENTE: 
-Numero de particoes criadas: 6
-Tempo de execucao: 0.02 segundos
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.28 segundos
 
 *****************************************
 Seleção natural - LIVRO: 
-Numero de particoes criadas: 6
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.29 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
 Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.29 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 1
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.11 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.12 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.00 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.14 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 17
+Tempo de execucao: 0.07 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.01 segundos
 
 *****************************************
 Seleção natural - CLIENTE: 
 Numero de particoes criadas: 6
-Tempo de execucao: 0.02 segundos
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 2
+Tempo de execucao: 0.01 segundos
 
 *****************************************
 Seleção natural - LIVRO: 
-Numero de particoes criadas: 6
+Numero de particoes criadas: 2
 Tempo de execucao: 0.02 segundos
 
 *****************************************
@@ -34,17 +157,94 @@ Numero de particoes criadas: 2
 Tempo de execucao: 0.01 segundos
 
 *****************************************
+////////////////// TESTE EM DIFERENTES TAMANHOS DE BASES \\\\\\\\\\\\\\\\\\\\\\\\\\\
+*****************************************
 Seleção natural - CLIENTE: 
-Numero de particoes criadas: 5
+Numero de particoes criadas: 3
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 3
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 3
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 6
 Tempo de execucao: 0.02 segundos
 
 *****************************************
 Seleção natural - LIVRO: 
-Numero de particoes criadas: 5
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 8
+Tempo de execucao: 0.05 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 8
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 8
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 3
+Tempo de execucao: 0.28 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 3
+Tempo de execucao: 0.31 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 3
+Tempo de execucao: 0.33 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.03 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 6
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 6
 Tempo de execucao: 0.03 segundos
 
 *****************************************
 Seleção natural - EMPRESTIMO: 
-Numero de particoes criadas: 5
-Tempo de execucao: 0.02 segundos
+Numero de particoes criadas: 6
+Tempo de execucao: 0.03 segundos
 
