@@ -201,6 +201,7 @@ int selecao_natural_livros(FILE *arq, int tam_particao)
             Livro *menor = NULL;
             int posicao_menor = -1;
 
+            //Encontra o menor
             for (int j = 0; j < tam_particao; j++)
             {
                 if (registros[j] != NULL)
@@ -228,7 +229,7 @@ int selecao_natural_livros(FILE *arq, int tam_particao)
                 registros[posicao_menor] = NULL;
             }
             else if (novo->id < anterior->id)
-            {
+            {   //Se a nova posição lida for menor que o anterior, ela vai direto para o reservatório
                 salvar_livro(novo, reservatorio);
                 registros[posicao_menor] = NULL;
             }
@@ -245,6 +246,7 @@ int selecao_natural_livros(FILE *arq, int tam_particao)
         if (tamanho_arquivo_livros(reservatorio) == 0)
             break;
 
+        //Recarrega o reservstorio
         rewind(reservatorio);
         for (int i = 0; i < tam_particao; i++)
         {
@@ -255,6 +257,7 @@ int selecao_natural_livros(FILE *arq, int tam_particao)
         reservatorio = fopen("livro/reservatorio.dat", "wb+");
     }
 
+    //Já que todos os registros foram manipulados, envazia-se o reservatório e cria uma nova partição
     if (is_array_empty_liv(registros, tam_particao) == 0)
     {
         sprintf(nomeParticao, "livro/partition%i.dat", qtdParticoes);

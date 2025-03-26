@@ -3,6 +3,7 @@
 #include "metodos_ordenacao/selecao_natural.c"
 #include "metodos_ordenacao/intercalacao_otima.c"
 #include "metodos_ordenacao/intercalacao_otima2.c"
+#include "hashing/hash.c"
 
 int main(void)
 {
@@ -86,12 +87,47 @@ int main(void)
     system("pause");*/
 
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
-    criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 100);
-    // int n_particoes = selecao_natural_clientes(clientes_arq, 11);
-    // intercalacao_otima_clientes2(n_particoes, clientes_arq);
-    // system("pause");
+    criar_bases_ordenadas(clientes_arq, livros_arq, emprestimos_arq, 200);
+
+    FILE *tabela_hash = ordenar_arquivos_hash(clientes_arq);
 
     int opcao = 0, continuar = 1, tamanho;
+    while (continuar)
+    {
+        menu_opcoes_hash(clientes_arq, tabela_hash);
+        scanf("%d", &opcao);
+        fflush(stdin);
+
+        switch (opcao)
+        {
+        case 0:
+            continuar = 0;
+            break;
+        case 1:
+            criar_novo_cli_hash(tabela_hash, clientes_arq);
+            break;
+        case 2:
+            buscar_cliente_hash(tabela_hash, clientes_arq);
+            break;
+        case 3:
+            excluir_cliente_hash(tabela_hash, clientes_arq);
+            break;
+        case 4:
+            imprimir_tabela_hash(tabela_hash);
+            break;
+        case 5:
+            imprimir_lista_encadeada_tabela(tabela_hash, clientes_arq);
+            break;
+        case 6:
+            imprimir_base_clientes(clientes_arq);
+            break;
+        default:
+            printf("[ERRO] Opcao invalida!\n");
+            break;
+        }
+    }
+
+    return 0;
 
     printf("**************** BEM VINDO AO SISTEMA DE GERENCIAMENTO DE BIBLIOTECA ************************");
 

@@ -271,3 +271,33 @@ Intercalacao Otima - EMPRESTIMO:
 Numero de particoes criadas: 3
 Tempo de execucao: 0.01 segundos
 
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.03 segundos
+
+*****************************************
+Intercalacao Otima - EMPRESTIMO: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.03 segundos
+
+*****************************************
+Intercalacao Otima - CLIENTE: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Intercalacao Otima - LIVRO: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.03 segundos
+
+*****************************************
+Intercalacao Otima - EMPRESTIMO: 
+Numero de particoes criadas: 4
+Tempo de execucao: 0.02 segundos
+

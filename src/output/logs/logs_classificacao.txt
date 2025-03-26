@@ -248,3 +248,33 @@ Seleção natural - EMPRESTIMO:
 Numero de particoes criadas: 6
 Tempo de execucao: 0.03 segundos
 
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 17
+Tempo de execucao: 0.10 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 17
+Tempo de execucao: 0.08 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 17
+Tempo de execucao: 0.09 segundos
+
+*****************************************
+Seleção natural - CLIENTE: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.04 segundos
+
+*****************************************
+Seleção natural - LIVRO: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Seleção natural - EMPRESTIMO: 
+Numero de particoes criadas: 5
+Tempo de execucao: 0.04 segundos
+

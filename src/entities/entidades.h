@@ -12,6 +12,8 @@ typedef struct TCliente
     int id;
     char nome[50];
     char cpf[15];
+    int prox;
+    int ocupado;
 } Cliente;
 
 typedef struct TLivro
@@ -52,7 +54,7 @@ void imprimir_data(struct tm *data);
 ***********************************************************/
 int tamanho_registro_cliente();
 int tamanho_arquivo_clientes(FILE *arq);
-Cliente *criar_cliente(int id, char *nome, char *cpf);
+Cliente *criar_cliente(int id, char *nome, char *cpf, int prox, int ocupado);
 void salvar_cliente(Cliente *cliente, FILE *arq);
 Cliente *ler_cliente(FILE *arq);
 void criar_base_ordenada_clientes(FILE *arq, int tamanho);

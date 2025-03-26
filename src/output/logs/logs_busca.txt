@@ -8,3 +8,163 @@ Busca sequencial - LIVRO:
 Numero de comparacoes: 92
  Tempo de execucao: 0.00 segundos
 
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+
+*****************************************
+Busca sequencial - CLIENTE: 
+Numero de comparacoes: 50
+ Tempo de execucao: 0.00 segundos
+

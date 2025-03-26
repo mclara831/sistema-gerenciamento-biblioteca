@@ -178,3 +178,57 @@ Numero de comparacoes: 712
 Numero de trocas: 390
 Tempo de execucao: 0.02 segundos
 
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 604
+Numero de trocas: 379
+Tempo de execucao: 0.01 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 604
+Numero de trocas: 379
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 604
+Numero de trocas: 379
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 68180
+Numero de trocas: 36096
+Tempo de execucao: 1.53 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 68180
+Numero de trocas: 36096
+Tempo de execucao: 1.55 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 68180
+Numero de trocas: 36096
+Tempo de execucao: 1.73 segundos
+
+*****************************************
+Quick Sort - CLIENTE: 
+Numero de comparacoes: 588
+Numero de trocas: 345
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Quick Sort - LIVRO: 
+Numero de comparacoes: 588
+Numero de trocas: 345
+Tempo de execucao: 0.02 segundos
+
+*****************************************
+Quick Sort - EMPRESTIMO: 
+Numero de comparacoes: 588
+Numero de trocas: 345
+Tempo de execucao: 0.02 segundos
+

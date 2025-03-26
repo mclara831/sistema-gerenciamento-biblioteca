@@ -3,6 +3,7 @@
 #include "../metodos_ordenacao/quick_sort.c"
 #include "../metodos_ordenacao/selecao_natural.c"
 #include "../metodos_ordenacao/intercalacao_otima2.c"
+#include "../hashing/hash.c"
 
 void menu_principal()
 {
@@ -74,7 +75,7 @@ void registrar_novo_cliente(FILE *arq)
         fgets(cpf, 14, stdin);
     }
 
-    Cliente *c = criar_cliente(tamanho_arquivo_clientes(arq) + 1, nome, cpf);
+    Cliente *c = criar_cliente(tamanho_arquivo_clientes(arq) + 1, nome, cpf, -1, 1);
     fseek(arq, 0, SEEK_END);
     salvar_cliente(c, arq);
 
@@ -100,7 +101,8 @@ void buscar_cliente(FILE *arq)
         scanf("%d", &opcao);
     }
 
-    if (opcao == 2 && ler_status_base() == 0) {
+    if (opcao == 2 && ler_status_base() == 0)
+    {
         printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
         return;
     }
@@ -111,8 +113,9 @@ void buscar_cliente(FILE *arq)
     (c != NULL) ? imprimir_cliente(c) : printf("[AVISO]: Cliente nao econtrado na base de dados!\n");
 }
 
-void editar_dados_cliente(FILE *arq) {
-    
+void editar_dados_cliente(FILE *arq)
+{
+
     int codigo;
     printf("\nDigite o codigo do cliente que voce deseja atualizar: ");
     scanf("%d", &codigo);
@@ -123,7 +126,7 @@ void editar_dados_cliente(FILE *arq) {
         printf("[AVISO]: Cliente nao encontrado!");
         return;
     }
-    
+
     char nome[50], cpf[15];
     fflush(stdin);
     printf("Digite o nome: ");
@@ -143,7 +146,7 @@ void editar_dados_cliente(FILE *arq) {
     }
 
     int posicao = posicao_cliente(c, arq);
-    Cliente *cliente = criar_cliente(c->id, nome, cpf);
+    Cliente *cliente = criar_cliente(c->id, nome, cpf, -1, 1);
     fseek(arq, tamanho_registro_cliente() * posicao, SEEK_SET);
     salvar_cliente(cliente, arq);
 
@@ -212,7 +215,8 @@ void buscar_livro(FILE *arq)
         scanf("%d", &opcao);
     }
 
-    if (opcao == 2 && ler_status_base() == 0) {
+    if (opcao == 2 && ler_status_base() == 0)
+    {
         printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
         return;
     }
@@ -230,12 +234,12 @@ void editar_dados_livro(FILE *arq)
     scanf("%d", &codigo);
     Livro *l = buscar_livro_sequencial(codigo, arq);
 
-    if (l == NULL)  
+    if (l == NULL)
     {
         printf("[AVISO]: Livro nao encontrado!");
         return;
     }
-    
+
     char titulo[50], autor[50], genero[10], disponibilidade;
     int anoPublicacao;
 
@@ -373,7 +377,7 @@ void realizar_devolucao(FILE *emp_arq, FILE *livro_arq)
     Emprestimo *emp = criar_emprestimo(e->id, e->livro, e->cliente, e->data_emprestimo, e->data_prevista, e->valor, 's', dias_em_atraso * multa, atraso);
     fseek(emp_arq, tamanho_registro_emprestimo() * (posicao_emp), SEEK_SET);
     salvar_emprestimo(emp, emp_arq);
-    
+
     imprimir_emprestimo(emp);
     printf("Livro devolvido!\n");
 
@@ -430,7 +434,8 @@ void buscar_emprestimo(FILE *arq)
         scanf("%d", &opcao);
     }
 
-    if (opcao == 2 && ler_status_base() == 0) {
+    if (opcao == 2 && ler_status_base() == 0)
+    {
         printf("\n[ERRO]: A base de dados esta desordenada. Utilize a busca sequencial!\n");
         return;
     }
@@ -460,13 +465,14 @@ void classificao_e_intercalacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_
     // Livros
     n_particoes = selecao_natural_livros(livros_arq, tam_particao);
     intercalacao_otima_livros2(num, n_particoes, livros_arq);
-    //Emprestimos
+    // Emprestimos
     n_particoes = selecao_natural_emp(emp_arq, tam_particao);
     intercalacao_otima_emprestimos2(num, n_particoes, emp_arq);
     salvar_status_base(1);
 }
 
-void iniciar_ordenacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq) {
+void iniciar_ordenacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq)
+{
     printf("\n\n[1] Ordenar pelo QuickSort\n");
     printf("[2] Ordenar pela classificacao e intercalacao\n");
     printf("Selecione o tipo de ordenacao: ");
@@ -488,6 +494,63 @@ void iniciar_ordenacao(FILE *clientes_arq, FILE *livros_arq, FILE *emp_arq) {
         printf("[AVISO]: Opcao invalida!\n");
         break;
     }
-    
+
     printf("[SUCESSO] Ordenação realizada com sucesso!\n");
+}
+
+/**********************************************************
+                FUNÇÕES PARA A HASH
+***********************************************************/
+
+void menu_opcoes_hash()
+{
+    printf("\n==================================================");
+    printf("\n              MENU DE OPCOES - HASH               ");
+    printf("\n==================================================");
+
+    printf("\n\nFuncoes da HASH");
+    printf("\n--------------------------------------------------");
+    printf("\n [1] Inserir um novo cliente");
+    printf("\n [2] Buscar cliente");
+    printf("\n [3] Excluir um cliente");
+    printf("\n [4] Imprimir tabela HASH");
+    printf("\n [5] Imprimir encadeamento da tabela HASH");
+    printf("\n [6] Imprimir base de clientes");
+    printf("\n--------------------------------------------------");
+    printf("\n\nDigite uma opcao: ");
+}
+
+void criar_novo_cli_hash(FILE *tabela_hash, FILE *clientes_arq)
+{
+    char nome[20], cpf[15];
+    fflush(stdin);
+    printf("\n\nDigite o nome: ");
+    scanf("%[^\n]", nome);
+    // fgets(nome, 20, stdin);
+    fflush(stdin);
+    printf("Digite o cpf(XXX.XXX.XXX-XX): ");
+    scanf("%[^\n]", cpf);
+    Cliente *c = criar_cliente(tamanho_arquivo_clientes(clientes_arq) + 1, nome, cpf, -1, 1);
+    inserir_registro_hash(tabela_hash, clientes_arq, c);
+    printf("\n[SUCESSO] Cliente inserido com sucesso!\n");
+}
+
+void buscar_cliente_hash(FILE *tabela_hash, FILE *clientes_arq)
+{
+    int codigo;
+    printf("\nDigite o codigo do cliente buscado: ");
+    scanf("%d", &codigo);
+    Cliente *cli = buscar_registro_hash(codigo, clientes_arq, tabela_hash);
+
+    (cli != NULL) ? imprimir_cliente(cli) : printf("\n[ERRO] Cliente nao encontrado!\n");
+}
+
+void excluir_cliente_hash(FILE *tabela_hash, FILE *clientes_arq)
+{
+    int codigo;
+    printf("\nDigite o codigo do cliente a ser excluido: ");
+    scanf("%d", &codigo);
+    excluir_registro_hash(codigo, clientes_arq, tabela_hash);
+
+    printf("\n[SUCESSO]: Cliente excluido com sucesso!\n");
 }

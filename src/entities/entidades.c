@@ -82,7 +82,7 @@ void imprimir_data(struct tm *data)
 ***********************************************************/
 int tamanho_registro_cliente()
 {
-    return sizeof(int) + sizeof(char) * 50 + sizeof(char) * 15;
+    return sizeof(int) + sizeof(char) * 50 + sizeof(char) * 15 + sizeof(int) + sizeof(int);
 }
 
 int tamanho_arquivo_clientes(FILE *arq)
@@ -92,7 +92,7 @@ int tamanho_arquivo_clientes(FILE *arq)
     return tamanho;
 }
 
-Cliente *criar_cliente(int id, char *nome, char *cpf)
+Cliente *criar_cliente(int id, char *nome, char *cpf, int prox, int ocupado)
 {
     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
     if (cliente)
@@ -101,6 +101,8 @@ Cliente *criar_cliente(int id, char *nome, char *cpf)
     cliente->id = id;
     strcpy(cliente->nome, nome);
     strcpy(cliente->cpf, cpf);
+    cliente->prox = prox;
+    cliente->ocupado = ocupado;
     return cliente;
 }
 
@@ -109,6 +111,8 @@ void salvar_cliente(Cliente *cliente, FILE *arq)
     fwrite(&cliente->id, sizeof(int), 1, arq);
     fwrite(cliente->nome, sizeof(char), 50, arq);
     fwrite(cliente->cpf, sizeof(char), 15, arq);
+    fwrite(&cliente->prox, sizeof(int), 1, arq);
+    fwrite(&cliente->ocupado, sizeof(int), 1, arq);
 }
 
 Cliente *ler_cliente(FILE *arq)
@@ -121,6 +125,8 @@ Cliente *ler_cliente(FILE *arq)
     }
     fread(cliente->nome, sizeof(char), 50, arq);
     fread(cliente->cpf, sizeof(char), 15, arq);
+    fread(&cliente->prox, sizeof(int), 1, arq);
+    fread(&cliente->ocupado, sizeof(int), 1, arq);
     return cliente;
 }
 
@@ -140,7 +146,7 @@ void criar_base_ordenada_clientes(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00");
+        cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00", -1, 1);
         salvar_cliente(cliente, arq);
     }
     free(cliente);
@@ -164,7 +170,7 @@ void criar_base_desordenada_clientes(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00");
+        cliente = criar_cliente(vetor[i], "ANONIMO", "000.000.000-00", -1, 1);
         salvar_cliente(cliente, arq);
     }
     free(cliente);
@@ -179,6 +185,8 @@ void imprimir_cliente(Cliente *cliente)
     printf("%s", cliente->nome);
     printf("\nCPF: ");
     printf("%s", cliente->cpf);
+    printf("\nProx: ");
+    printf("%d", cliente->prox);
     printf("\n**********************************************\n");
 }
 
@@ -454,7 +462,7 @@ void criar_base_ordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00");
+        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00", -1, 1);
         Livro *livro = criar_livro(1, "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
         emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 5.00, 'n', 0.00, 'n');
         salvar_emprestimo(emprestimo, arq);
@@ -486,7 +494,7 @@ void criar_base_desordenada_emprestimos(FILE *arq, int tamanho)
 
     for (int i = 0; i < tamanho; i++)
     {
-        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00");
+        Cliente *cliente = criar_cliente(1, "ANONIMO", "000.000.000-00", -1, 1);
         Livro *livro = criar_livro(1, "Linguagem C", "Desconhecido", "Cientifico", 1996, 's');
         emprestimo = criar_emprestimo(vetor[i], livro, cliente, data_emp, *data_prevista, 5.00, 'n', 0.00, 'n');
         salvar_emprestimo(emprestimo, arq);

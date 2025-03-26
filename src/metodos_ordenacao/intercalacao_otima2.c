@@ -189,7 +189,7 @@ void intercalacao_otima_livros2(int num, int total_particoes, FILE *arq)
     // Inicializa a fila de partições
     TFila fila;
     FFVazia(&fila);
-    FILE **estruturas = (FILE **)malloc(num * sizeof(FILE *));
+    FILE **estruturas = (FILE **)malloc(num * sizeof(FILE *));//Abre  os arquivos
     Livro *livros[num]; 
 
     // Abre as partições iniciais e as enfileira
@@ -204,6 +204,7 @@ void intercalacao_otima_livros2(int num, int total_particoes, FILE *arq)
     FILE *particao;
     while (fila.tamanho > 1)
     {
+        //Desenfileira os primeiros n-1 registros, os coloca nos vetores
         for (int i = 0; i < num; i++)
         {
             if (fila.tamanho == 0)
