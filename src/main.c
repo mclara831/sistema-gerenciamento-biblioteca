@@ -87,9 +87,10 @@ int main(void)
     system("pause");*/
 
     /*********************CRIAÇÃO PADRÃO DA BASE DE DADOS PARA INICIALIZAÇÃO DO SISTEMA ********************/
-    criar_bases_ordenadas(clientes_arq, livros_arq, emprestimos_arq, 200);
+    criar_bases_desordenadas(clientes_arq, livros_arq, emprestimos_arq, 300);
 
     FILE *tabela_hash = ordenar_arquivos_hash(clientes_arq);
+    imprimir_tabela_hash(tabela_hash);
 
     int opcao = 0, continuar = 1, tamanho;
     while (continuar)
@@ -102,6 +103,8 @@ int main(void)
         {
         case 0:
             continuar = 0;
+            fclose(clientes_arq);
+            fclose(tabela_hash);
             break;
         case 1:
             criar_novo_cli_hash(tabela_hash, clientes_arq);

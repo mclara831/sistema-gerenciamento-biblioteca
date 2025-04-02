@@ -110,11 +110,13 @@ void salvar_posicao(Posicao *pos, FILE *arq)
     fwrite(&pos->posicao, sizeof(int), 1, arq);
 }
 
+//Função hash com base no x mod 100
 int funcao_hash(Cliente *cliente)
 {
     return cliente->id % TAMANHO_TABELA;
 }
 
+//Cria a tabela hash vazia
 FILE *criar_tabela_hash()
 {
     FILE *tabela_hash = fopen("tabela_hash.dat", "w+b");
@@ -148,51 +150,6 @@ void atualizar_prox(FILE *clientes_arq, int posicao, int novo_prox)
     salvar_cliente(cliente, clientes_arq);
 
     free(cliente);
-}
-
-FILE *ordenar_arquivos_hash(FILE *clientes_arq)
-{
-    Fila = inicializa_fila();
-    FILE *tabela_hash = criar_tabela_hash();
-
-    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
-
-    int reg = 0;
-    int tamanho_arq = tamanho_arquivo_clientes(clientes_arq);
-
-    rewind(clientes_arq);
-
-    while ((cliente = ler_cliente(clientes_arq)) != NULL && reg < tamanho_arq)
-    {
-        int hash = funcao_hash(cliente);
-        fseek(tabela_hash, hash * tamanho_registro_hash(), SEEK_SET);
-        Posicao *pos = ler_posicao(tabela_hash);
-
-        if (pos->posicao == -1)
-        {
-            fseek(tabela_hash, hash * tamanho_registro_hash(), SEEK_SET);
-            pos = criar_posicao(reg);
-            salvar_posicao(pos, tabela_hash);
-        }
-        else
-        {
-            fseek(clientes_arq, pos->posicao * tamanho_registro_cliente(), SEEK_SET);
-            cliente = ler_cliente(clientes_arq);
-            int anterior = pos->posicao;
-
-            // Percorre a lista encadeada até encontrar o último nó
-            while (cliente->prox != -1)
-            {
-                fseek(clientes_arq, cliente->prox * tamanho_registro_cliente(), SEEK_SET);
-                anterior = cliente->prox;
-                cliente = ler_cliente(clientes_arq);
-            }
-            atualizar_prox(clientes_arq, anterior, reg);
-        }
-        free(cliente);
-        reg++;
-    }
-    return tabela_hash;
 }
 
 FILE *inserir_registro_hash(FILE *tabela_hash, FILE *clientes_arq, Cliente *cliente)
@@ -307,6 +264,7 @@ void excluir_registro_hash(int cliente_id, FILE *clientes_arq, FILE *tabela_hash
     int pos_anterior = -1;
     int pos_atual = pos->posicao;
 
+    //O cliente é o único na lista encadeada
     if (cliente->id == cliente_id && cliente->ocupado == 1 && cliente->prox == -1)
     {
         pos = criar_posicao(-1);
@@ -351,7 +309,7 @@ void excluir_registro_hash(int cliente_id, FILE *clientes_arq, FILE *tabela_hash
         }
         else
         {
-            // Lista ficará vazia
+            // Lista ficará vazia (compartimento)
             Posicao *nova_pos = criar_posicao(-1);
             salvar_posicao(nova_pos, tabela_hash);
             free(nova_pos);
@@ -423,6 +381,53 @@ void imprimir_tabela_hash(FILE *tabela_hash)
         printf(" %d:\t%d\n", i, pos->posicao);
         free(pos);
     }
+}
+
+FILE *ordenar_arquivos_hash(FILE *clientes_arq)
+{
+    Fila = inicializa_fila();
+    FILE *tabela_hash = criar_tabela_hash();
+
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    int reg = 0;
+    int tamanho_arq = tamanho_arquivo_clientes(clientes_arq);
+
+    rewind(clientes_arq);
+
+    while ((cliente = ler_cliente(clientes_arq)) != NULL && reg < tamanho_arq)
+    {
+        int hash = funcao_hash(cliente);
+        fseek(tabela_hash, hash * tamanho_registro_hash(), SEEK_SET);
+        Posicao *pos = ler_posicao(tabela_hash);
+
+        if (pos->posicao == -1)
+        {
+            fseek(tabela_hash, hash * tamanho_registro_hash(), SEEK_SET);
+            pos = criar_posicao(reg);
+            salvar_posicao(pos, tabela_hash);
+        }
+        else
+        {
+            fseek(clientes_arq, pos->posicao * tamanho_registro_cliente(), SEEK_SET);
+            cliente = ler_cliente(clientes_arq);
+            int anterior = pos->posicao;
+            
+            // Percorre a lista encadeada até encontrar o último nó
+            while (cliente->prox != -1)
+            {
+                fseek(clientes_arq, cliente->prox * tamanho_registro_cliente(), SEEK_SET);
+                anterior = cliente->prox;
+                cliente = ler_cliente(clientes_arq);
+            }
+            atualizar_prox(clientes_arq, anterior, reg);
+            
+            fseek(clientes_arq, (reg+1) * tamanho_registro_cliente(), SEEK_SET);
+        }
+        free(cliente);
+        reg++;
+    }
+    return tabela_hash;
 }
 
 #endif
